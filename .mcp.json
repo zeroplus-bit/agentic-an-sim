@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "aan-service-layer": {
+      "type": "stdio",
+      "command": ".venv/Scripts/python.exe",
+      "args": ["-m", "mcp_servers.sn_mcp_server"],
+      "env": { "AANS_SERVICE_URL": "http://127.0.0.1:8100", "PYTHONUTF8": "1" }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{"id": "ca-001", "text": "Surgeons will steer a robotic scalpel from another city, every millisecond counts.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "ca-002", "text": "The welding robots on line 3 need deterministic control traffic below 2 ms.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {"latency_ms": 2}, "devices": null}
+{"id": "ca-003", "text": "Firefighters need guaranteed voice and telemetry during the wildfire response.", "lang": "en", "slice": "URLLC", "priority": 1, "expectations": {}, "devices": null}
+{"id": "ca-004", "text": "Connected cars at the intersection exchange collision warnings and must never miss one.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "ca-005", "text": "Operators remotely drive excavators at the mine site, 10 ms round trip at most.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {"latency_ms": 10}, "devices": null}
+{"id": "ca-006", "text": "Grid protection signals between substations require 99.9999% availability.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {"reliability_percent": 99.9999}, "devices": null}
+{"id": "ca-007", "text": "Inspection drones beyond visual line of sight must receive commands instantly.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "ca-008", "text": "Ambulance paramedics stream vitals to the ER and get live guidance, 20 Mbps, 5 ms.", "lang": "en", "slice": "URLLC", "priority": 1, "expectations": {"bandwidth_mbps": 20, "latency_ms": 5}, "devices": null}
+{"id": "ca-009", "text": "Exoskeleton rehabilitation devices are tuned by a therapist over the network in real time.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "ca-010", "text": "Train signalling at the port rail yard cannot tolerate packet loss.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "ca-011", "text": "다른 도시에서 의사가 로봇 수술기를 조종합니다. 지연은 3ms 이내여야 해요.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {"latency_ms": 3}, "devices": null}
+{"id": "ca-012", "text": "공장 3라인 용접 로봇의 제어 신호가 끊기면 안 됩니다.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "ca-013", "text": "산불 진화 현장 소방대원들의 통신을 최우선으로 보장해 주세요.", "lang": "ko", "slice": "URLLC", "priority": 1, "expectations": {}, "devices": null}
+{"id": "ca-014", "text": "교차로 차량 간 충돌 경고 메시지를 놓치지 않게 해야 합니다.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "ca-015", "text": "광산 굴착기를 원격으로 운전하려고 합니다, 왕복 10ms 이하.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {"latency_ms": 10}, "devices": null}
+{"id": "ca-016", "text": "변전소 사이 보호 신호는 가용성 99.9999%가 필요합니다.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {"reliability_percent": 99.9999}, "devices": null}
+{"id": "ca-017", "text": "가시권 밖 점검 드론에 명령이 즉시 전달되어야 합니다.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "ca-018", "text": "구급차에서 환자 생체신호를 응급실로 보내고 실시간 지시를 받습니다. 20Mbps, 5ms.", "lang": "ko", "slice": "URLLC", "priority": 1, "expectations": {"bandwidth_mbps": 20, "latency_ms": 5}, "devices": null}
+{"id": "ca-019", "text": "재활 로봇을 치료사가 네트워크로 즉각 조정합니다.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "ca-020", "text": "항만 철도 신호 체계는 패킷 손실을 허용하지 않습니다.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "ca-021", "text": "Thousands of fans will post videos from the arena during the final.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-022", "text": "The broadcaster wants to send multiple camera feeds in UHD, 400 Mbps.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {"bandwidth_mbps": 400}, "devices": null}
+{"id": "ca-023", "text": "Students on campus watch lectures and download course material all day.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-024", "text": "Our museum offers immersive headset tours that need lots of throughput.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-025", "text": "Guests at the hotel expect smooth Netflix in every room.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-026", "text": "Esports tournament players need high bandwidth and latency under 30 ms.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {"latency_ms": 30}, "devices": null}
+{"id": "ca-027", "text": "Map updates of several gigabytes are pushed to vehicles overnight, best effort is fine.", "lang": "en", "slice": "eMBB", "priority": 4, "expectations": {}, "devices": null}
+{"id": "ca-028", "text": "Downtown office workers run video calls with shared screens, 50 Mbps each.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {"bandwidth_mbps": 50}, "devices": null}
+{"id": "ca-029", "text": "The fashion show is streamed live to social media in 4K.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-030", "text": "Background backup of hospital imaging archives to the cloud, low priority, 1 Gbps.", "lang": "en", "slice": "eMBB", "priority": 4, "expectations": {"bandwidth_mbps": 1000}, "devices": null}
+{"id": "ca-031", "text": "결승전 동안 경기장 관중 수천 명이 영상을 올릴 겁니다.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-032", "text": "방송사가 UHD 카메라 여러 대의 영상을 보내려 합니다, 400Mbps.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {"bandwidth_mbps": 400}, "devices": null}
+{"id": "ca-033", "text": "캠퍼스 학생들이 하루 종일 강의를 보고 자료를 내려받습니다.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-034", "text": "박물관 몰입형 헤드셋 투어에 많은 전송량이 필요합니다.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-035", "text": "호텔 객실마다 끊김 없는 넷플릭스 시청을 원합니다.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-036", "text": "e스포츠 대회 선수들은 넓은 대역폭과 30ms 이하 지연이 필요합니다.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {"latency_ms": 30}, "devices": null}
+{"id": "ca-037", "text": "수 기가바이트 지도 업데이트를 밤에 차량으로 배포합니다, 저우선으로 충분해요.", "lang": "ko", "slice": "eMBB", "priority": 4, "expectations": {}, "devices": null}
+{"id": "ca-038", "text": "도심 사무실 직원들의 화면공유 화상통화용, 1인당 50Mbps.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {"bandwidth_mbps": 50}, "devices": null}
+{"id": "ca-039", "text": "패션쇼를 SNS로 4K 라이브 송출합니다.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-040", "text": "병원 영상 아카이브 클라우드 백업, 저우선, 1Gbps.", "lang": "ko", "slice": "eMBB", "priority": 4, "expectations": {"bandwidth_mbps": 1000}, "devices": null}
+{"id": "ca-041", "text": "Every household water meter in the district reports once an hour, about 20,000 of them.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": 20000}
+{"id": "ca-042", "text": "Farmers deploy battery-powered probes across the fields to log humidity.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-043", "text": "Each shipping container at the port carries a tag that pings its location.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-044", "text": "Parking bays downtown signal whether they are free, a few bytes per update.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-045", "text": "Bridge strain gauges send readings every ten minutes for structural health monitoring.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-046", "text": "The city wants to connect 5000 trash bins that report fill level.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": 5000}
+{"id": "ca-047", "text": "Cold-chain loggers in trucks upload temperatures, 1 Mbps total is plenty.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {"bandwidth_mbps": 1}, "devices": null}
+{"id": "ca-048", "text": "Campus buildings have occupancy counters that should run for years on one battery.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-049", "text": "Factory machines report vibration and temperature for predictive maintenance, 2000 nodes, latency up to 1000 ms is ok.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {"latency_ms": 1000}, "devices": 2000}
+{"id": "ca-050", "text": "Livestock collars track cattle grazing in remote pastures.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-051", "text": "지역 내 모든 가정용 수도 계량기가 매시간 보고합니다, 약 20,000개.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": 20000}
+{"id": "ca-052", "text": "농가가 들판 곳곳에 배터리형 습도 측정 장치를 설치합니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-053", "text": "항만의 컨테이너마다 위치를 알려 주는 태그가 붙어 있습니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-054", "text": "도심 주차면이 비었는지 몇 바이트씩 알려 줍니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-055", "text": "교량 변형률 게이지가 10분마다 구조 안전 데이터를 보냅니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-056", "text": "시에서 적재량을 알려 주는 쓰레기통 5000개를 연결하려 합니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": 5000}
+{"id": "ca-057", "text": "냉장 트럭 온도 기록기가 업로드합니다, 전체 1Mbps면 충분합니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {"bandwidth_mbps": 1}, "devices": null}
+{"id": "ca-058", "text": "캠퍼스 건물 재실 감지기는 배터리 하나로 몇 년을 버텨야 합니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "ca-059", "text": "공장 설비 진동·온도 예지보전 노드 2000개, 지연은 1000ms까지 괜찮습니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {"latency_ms": 1000}, "devices": 2000}
+{"id": "ca-060", "text": "먼 목초지에서 소 목걸이로 방목 위치를 추적합니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}

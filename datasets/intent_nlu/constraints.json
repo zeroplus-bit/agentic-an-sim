@@ -1,0 +1,19 @@
+{
+  "_note": "Declarative constraint shapes checked on every parsed intent (SHACL-style: target slice + property + condition + severity). severity: error = invalid value (blocks submit), conflict = KPI contradicts the classified slice (blocks submit unless force=true, asks for clarification), warning = unusual but allowed. 'basis' says where a threshold comes from; 'assumption' thresholds are engineering choices aligned with the simulator twin (resource_layer/comm_twin.py), not values quoted from a standard.",
+  "sliceTypes": {"eMBB": {"sst": 1}, "URLLC": {"sst": 2}, "mMTC": {"sst": 3}},
+  "sliceTypesBasis": "3GPP TS 23.501 standardized SST values (1 eMBB, 2 URLLC, 3 MIoT)",
+  "rules": [
+    {"id": "dom-latency", "slice": "*", "kpi": "latency_ms", "test": "outside", "range": [0.1, 60000], "severity": "error", "basis": "value domain", "message": "latency must be between 0.1 ms and 60 s"},
+    {"id": "dom-bandwidth", "slice": "*", "kpi": "bandwidth_mbps", "test": "outside", "range": [0.001, 100000], "severity": "error", "basis": "value domain", "message": "bandwidth must be between 1 kbps and 100 Gbps"},
+    {"id": "dom-reliability", "slice": "*", "kpi": "reliability_percent", "test": "outside", "range": [50, 99.9999999], "severity": "error", "basis": "value domain", "message": "reliability must be a percentage below 100"},
+    {"id": "dom-devices", "slice": "*", "kpi": "devices", "test": "outside", "range": [1, 10000000], "severity": "error", "basis": "value domain", "message": "device count must be a positive integer"},
+    {"id": "urllc-relaxed-latency", "slice": "URLLC", "kpi": "latency_ms", "test": ">", "value": 50, "severity": "conflict", "suggest": ["eMBB", "mMTC"], "basis": "assumption", "message": "a URLLC slice with a latency bound above 50 ms is not low-latency"},
+    {"id": "urllc-huge-bw", "slice": "URLLC", "kpi": "bandwidth_mbps", "test": ">", "value": 1000, "severity": "warning", "suggest": ["eMBB"], "basis": "assumption", "message": "more than 1 Gbps on a URLLC slice exceeds the twin's per-cell capacity (400 Mbps x 2 cells)"},
+    {"id": "urllc-massive", "slice": "URLLC", "kpi": "devices", "test": ">", "value": 10000, "severity": "warning", "suggest": ["mMTC"], "basis": "assumption", "message": "more than 10,000 URLLC devices in one area is unusual"},
+    {"id": "embb-ultra-low-latency", "slice": "eMBB", "kpi": "latency_ms", "test": "<", "value": 5, "severity": "conflict", "suggest": ["URLLC"], "basis": "assumption", "message": "a latency bound under 5 ms needs a URLLC slice"},
+    {"id": "embb-five-nines", "slice": "eMBB", "kpi": "reliability_percent", "test": ">=", "value": 99.999, "severity": "warning", "suggest": ["URLLC"], "basis": "assumption", "message": "five-nines reliability is a URLLC characteristic"},
+    {"id": "mmtc-low-latency", "slice": "mMTC", "kpi": "latency_ms", "test": "<", "value": 10, "severity": "conflict", "suggest": ["URLLC"], "basis": "assumption", "message": "a latency bound under 10 ms contradicts massive low-power IoT"},
+    {"id": "mmtc-high-bw", "slice": "mMTC", "kpi": "bandwidth_mbps", "test": ">", "value": 50, "severity": "conflict", "suggest": ["eMBB"], "basis": "assumption", "message": "more than 50 Mbps contradicts low-rate massive IoT"},
+    {"id": "mmtc-five-nines", "slice": "mMTC", "kpi": "reliability_percent", "test": ">=", "value": 99.999, "severity": "warning", "suggest": ["URLLC"], "basis": "assumption", "message": "five-nines reliability is unusual for massive IoT"}
+  ]
+}

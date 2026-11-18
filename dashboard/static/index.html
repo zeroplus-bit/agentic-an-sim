@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AAN 운영 대시보드</title>
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f4f4f1; --surface-1: #fcfcfb; --surface-2: #f0efeb;
+  --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #7a7974;
+  --grid: #e1e0d9; --border: rgba(11,11,11,0.10);
+  --service: #2a78d6; --network: #eb6834; --resource: #1baf7a;
+  --good: #0ca30c; --warning: #fab219; --serious: #ec835a; --critical: #d03b3b;
+  --seq-1: #dbe9fa; --seq-2: #a9cbf2; --seq-3: #6ea6e6; --seq-4: #2a78d6; --seq-5: #17508f;
+  --accent: #2a78d6; --row-hover: rgba(42,120,214,0.07); --sel: rgba(42,120,214,0.14);
+  --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --bg: #111110; --surface-1: #1a1a19; --surface-2: #232321;
+    --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #8f8e86;
+    --grid: #2c2c2a; --border: rgba(255,255,255,0.10);
+    --service: #3987e5; --network: #d95926; --resource: #199e70;
+    --seq-1: #1d2b3d; --seq-2: #24456d; --seq-3: #2f66a8; --seq-4: #3987e5; --seq-5: #8dbcf2;
+    --accent: #3987e5; --row-hover: rgba(57,135,229,0.10); --sel: rgba(57,135,229,0.20);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111110; --surface-1: #1a1a19; --surface-2: #232321;
+  --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #8f8e86;
+  --grid: #2c2c2a; --border: rgba(255,255,255,0.10);
+  --service: #3987e5; --network: #d95926; --resource: #199e70;
+  --seq-1: #1d2b3d; --seq-2: #24456d; --seq-3: #2f66a8; --seq-4: #3987e5; --seq-5: #8dbcf2;
+  --accent: #3987e5; --row-hover: rgba(57,135,229,0.10); --sel: rgba(57,135,229,0.20);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text-primary);
+       font: 13px/1.45 "Segoe UI", "Malgun Gothic", system-ui, sans-serif; }
+header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 12px 16px;
+         background: var(--surface-1); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 5; }
+header h1 { font-size: 16px; margin: 0; font-weight: 650; }
+header .sub { color: var(--text-secondary); font-size: 12px; }
+.spacer { flex: 1; }
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 999px;
+        border: 1px solid var(--border); background: var(--surface-2); font-size: 12px; color: var(--text-secondary); }
+.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex: none; }
+.btn { font: inherit; font-size: 12px; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border);
+       background: var(--surface-2); color: var(--text-primary); cursor: pointer; }
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); color: #fff; border-color: transparent; }
+.btn.small { padding: 2px 7px; font-size: 11px; }
+main { padding: 12px 16px 40px; display: grid; gap: 12px; max-width: 1800px; margin: 0 auto; }
+.card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 12px; min-width: 0; }
+.card h2 { font-size: 13px; margin: 0 0 8px; font-weight: 650; display: flex; gap: 8px; align-items: center; }
+.card h2 .hint { font-weight: 400; color: var(--text-muted); font-size: 11.5px; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+.kpi .label { color: var(--text-secondary); font-size: 11.5px; }
+.kpi .value { font-size: 24px; font-weight: 650; font-variant-numeric: tabular-nums; margin-top: 2px; }
+.kpi .foot { color: var(--text-muted); font-size: 11px; margin-top: 2px; min-height: 15px; }
+.row2 { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 12px; }
+.row4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.row3 { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.2fr) minmax(0, 1fr); gap: 12px; }
+@media (max-width: 1200px) { .row2, .row3 { grid-template-columns: minmax(0,1fr); } .row4 { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 700px) { .row4 { grid-template-columns: minmax(0,1fr); } }
+.scroll { overflow: auto; }
+/* incidents */
+.inc { border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; margin-bottom: 8px; cursor: pointer; }
+.inc:hover { background: var(--row-hover); }
+.inc.sel { background: var(--sel); border-color: var(--accent); }
+.inc .top { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.inc .id { font-family: var(--mono); font-size: 12px; color: var(--text-secondary); }
+.inc .cause { color: var(--text-secondary); font-size: 12px; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.steps { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 4px; margin-top: 8px; }
+.step { border-radius: 6px; padding: 4px 6px; background: var(--surface-2); color: var(--text-muted); font-size: 11.5px; border: 1px solid transparent; }
+.step b { display: block; font-weight: 600; }
+.step.on { color: var(--text-primary); border-color: var(--accent); background: var(--sel); }
+.step.warn { border-color: var(--serious); }
+.meta { display: flex; gap: 12px; flex-wrap: wrap; color: var(--text-secondary); font-size: 11.5px; margin-top: 6px; }
+.badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; padding: 1px 7px; border-radius: 999px;
+         border: 1px solid var(--border); color: var(--text-primary); background: var(--surface-2); white-space: nowrap; }
+.empty { color: var(--text-muted); font-size: 12px; padding: 12px 0; }
+/* cells */
+.cells { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 6px; }
+.site { display: contents; }
+.cell { border: 1px solid var(--border); border-radius: 7px; padding: 6px 8px; position: relative; background: var(--surface-1); }
+.cell .nm { font-family: var(--mono); font-size: 11.5px; display: flex; justify-content: space-between; gap: 6px; }
+.cell .bar { height: 8px; border-radius: 4px; background: var(--surface-2); margin: 5px 0 3px; overflow: hidden; }
+.cell .bar i { display: block; height: 100%; border-radius: 4px; }
+.cell .sm { color: var(--text-muted); font-size: 11px; display: flex; justify-content: space-between; gap: 4px; }
+.cell.down { border-color: var(--critical); border-style: dashed; }
+.legend { display: flex; gap: 10px; flex-wrap: wrap; color: var(--text-secondary); font-size: 11px; margin-top: 8px; align-items: center; }
+.sw { width: 18px; height: 8px; border-radius: 3px; display: inline-block; vertical-align: middle; }
+/* feeds */
+.feed { max-height: 300px; overflow: auto; }
+.fi { display: grid; grid-template-columns: 58px 1fr; gap: 6px; padding: 4px 0; border-bottom: 1px solid var(--grid); font-size: 12px; cursor: pointer; }
+.fi:hover { background: var(--row-hover); }
+.fi .t { color: var(--text-muted); font-family: var(--mono); font-size: 11px; }
+.fi .s { overflow-wrap: anywhere; }
+.layerTag { font-size: 10.5px; padding: 0 5px; border-radius: 4px; color: #fff; margin-right: 4px; }
+.sev { display: inline-flex; width: 15px; height: 15px; border-radius: 50%; align-items: center; justify-content: center;
+       font-size: 10px; font-weight: 700; color: #fff; flex: none; margin-right: 3px; vertical-align: -3px; }
+.sev.ok { background: var(--good); } .sev.warn { background: var(--warning); color: #0b0b0b; }
+.sev.critical { background: var(--critical); } .sev.info { background: var(--text-muted); }
+/* tables */
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+th { text-align: left; color: var(--text-secondary); font-weight: 600; padding: 4px 6px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+td { padding: 4px 6px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.mono { font-family: var(--mono); font-size: 11.5px; }
+/* log */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
+.filters select, .filters input[type=text] { font: inherit; font-size: 12px; padding: 3px 6px; border-radius: 6px;
+       border: 1px solid var(--border); background: var(--surface-2); color: var(--text-primary); }
+.filters label { display: inline-flex; gap: 4px; align-items: center; font-size: 12px; color: var(--text-secondary); }
+.logwrap { max-height: 520px; overflow: auto; border: 1px solid var(--grid); border-radius: 8px; }
+.log { width: 100%; font-size: 12px; }
+.log th { position: sticky; top: 0; background: var(--surface-1); z-index: 1; }
+.log tr { cursor: pointer; }
+.log tr:hover td { background: var(--row-hover); }
+.log td.sum { overflow-wrap: anywhere; }
+.tabs { display: flex; gap: 4px; margin-bottom: 8px; }
+.tab { padding: 4px 10px; border-radius: 6px; cursor: pointer; color: var(--text-secondary); border: 1px solid transparent; font-size: 12px; }
+.tab.on { border-color: var(--border); background: var(--surface-2); color: var(--text-primary); }
+pre.raw { margin: 0; max-height: 520px; overflow: auto; font: 11.5px/1.45 var(--mono); background: var(--surface-2);
+          padding: 10px; border-radius: 8px; white-space: pre-wrap; overflow-wrap: anywhere; }
+/* modal */
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: none; align-items: center; justify-content: center; z-index: 20; padding: 16px; }
+.modal.on { display: flex; }
+.modal .box { background: var(--surface-1); border-radius: 12px; border: 1px solid var(--border); width: min(1100px, 100%);
+              max-height: 90vh; overflow: auto; padding: 16px; }
+.modal pre { font: 11.5px/1.45 var(--mono); background: var(--surface-2); padding: 10px; border-radius: 8px; white-space: pre-wrap; overflow-wrap: anywhere; }
+#tip { position: fixed; pointer-events: none; z-index: 30; background: var(--surface-1); border: 1px solid var(--border);
+       border-radius: 8px; padding: 8px 10px; font-size: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.18); display: none; max-width: 320px; }
+.ctl { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.ctl input[type=text] { flex: 1; min-width: 160px; font: inherit; font-size: 12px; padding: 4px 8px; border-radius: 6px;
+       border: 1px solid var(--border); background: var(--surface-2); color: var(--text-primary); }
+.note { color: var(--text-muted); font-size: 11.5px; }
+.rq { border-bottom: 1px solid var(--grid); padding: 6px 0; font-size: 12px; }
+.rq .acts { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>AAN 운영 대시보드</h1>
+    <div class="sub">이상감지 → 보고 → 처리 → 조율 → 해결 · Service / Network / Resource Layer 실시간 (SSE)</div>
+  </div>
+  <div class="spacer"></div>
+  <span class="pill" id="link-service"><span class="dot"></span>Service</span>
+  <span class="pill" id="link-network"><span class="dot"></span>Network</span>
+  <span class="pill" id="link-resource"><span class="dot"></span>Resource</span>
+  <span class="pill" id="link-dash"><span class="dot"></span>Dashboard stream</span>
+  <span class="pill mono" id="clock">--:--:--</span>
+  <button class="btn" id="theme">테마</button>
+</header>
+
+<main>
+  <section class="card"><div class="kpis" id="kpis"></div></section>
+
+  <section class="row2">
+    <div class="card">
+      <h2>인시던트 파이프라인 <span class="hint">드리프트 감지부터 복구까지 한 줄로 · 클릭하면 아래 로그가 해당 인시던트로 필터됩니다</span></h2>
+      <div id="incidents" class="scroll" style="max-height:440px"></div>
+    </div>
+    <div class="card">
+      <h2>셀 PRB 이용률 <span class="hint">Resource Layer 디지털 트윈</span></h2>
+      <div id="cells" class="cells"></div>
+      <div class="legend">
+        <span><span class="sw" style="background:var(--seq-2)"></span> 낮음</span>
+        <span><span class="sw" style="background:var(--seq-4)"></span> 목표 0.7–0.9</span>
+        <span><span class="sw" style="background:var(--critical)"></span> ≥ 0.95 포화</span>
+        <span>⇄ 부하분산(steering)</span><span>▲ 활성 알람</span>
+      </div>
+      <div class="note" id="scenarioLine" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <section class="row4">
+    <div class="card"><h2>① 이상감지 <span class="hint">NR-09 알람 · 드리프트</span></h2><div class="feed" id="feed-DETECT"></div></div>
+    <div class="card"><h2>② 이상징후 보고 <span class="hint">SN-04 · SN-07</span></h2><div class="feed" id="feed-REPORT"></div></div>
+    <div class="card"><h2>③ 처리·실행 모니터링 <span class="hint">에이전트 · MCP · NR-04/05/06</span></h2><div class="feed" id="feed-EXECUTE"></div></div>
+    <div class="card"><h2>④ 조율 <span class="hint">SN-14 · 오케스트레이터 결정</span></h2><div class="feed" id="feed-COORDINATE"></div></div>
+  </section>
+
+  <section class="row3">
+    <div class="card">
+      <h2>에이전트 · MCP 도구 호출</h2>
+      <div class="scroll"><table id="agents"></table></div>
+      <div class="scroll" style="margin-top:10px"><table id="tools"></table></div>
+    </div>
+    <div class="card">
+      <h2>인텐트 현황</h2>
+      <div class="scroll"><table id="intents"></table></div>
+    </div>
+    <div class="card">
+      <h2>사람 검토 · 결정 대기 <span class="hint" id="rqCount"></span></h2>
+      <div id="review" class="scroll" style="max-height:200px"></div>
+      <h2 style="margin-top:12px">시나리오 제어 <span class="hint">데모 / 검증용</span></h2>
+      <div class="ctl">
+        <button class="btn primary" data-act="base">기본 인텐트 3종 제출</button>
+        <button class="btn" data-sc='{"is_emergency":true}'>응급 상황</button>
+        <button class="btn" data-sc='{"is_special_event":true}'>특별 이벤트</button>
+        <button class="btn" data-sc='{"is_iot_surge":true}'>IoT 폭증</button>
+        <button class="btn" data-sc='{"cell_down":["gNB-012-1"]}'>셀 장애 gNB-012-1</button>
+        <button class="btn" data-sc='{"load_factor":1.6}'>부하 ×1.6</button>
+        <button class="btn" data-sc='{"is_emergency":false,"is_special_event":false,"is_iot_surge":false,"cell_down":[],"load_factor":1.0}'>모두 해제</button>
+      </div>
+      <div class="ctl">
+        <input type="text" id="utter" placeholder="자연어 인텐트 (예: 병원 A 원격수술 5 ms, 50 Mbps, 99.999%)">
+        <button class="btn" id="submitUtter">제출</button>
+      </div>
+      <div class="note" id="ctlResult"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="tabs">
+      <div class="tab on" data-tab="events">통합 이벤트 로그</div>
+      <div class="tab" data-tab="raw">프로세스 로그 (raw)</div>
+    </div>
+    <div id="tab-events">
+      <div class="filters">
+        <label><input type="checkbox" class="fl-layer" value="service" checked> Service</label>
+        <label><input type="checkbox" class="fl-layer" value="network" checked> Network</label>
+        <label><input type="checkbox" class="fl-layer" value="resource" checked> Resource</label>
+        <select id="fl-stage">
+          <option value="">모든 단계</option><option value="DETECT">감지</option><option value="REPORT">보고</option>
+          <option value="EXECUTE">처리</option><option value="COORDINATE">조율</option><option value="RESOLVE">해결</option>
+          <option value="FLOW">기타 신호</option><option value="LOG">일반 로그</option>
+        </select>
+        <select id="fl-kind">
+          <option value="">모든 종류</option><option value="msg">SN/NR 메시지</option><option value="log">로그</option>
+          <option value="tool">MCP 도구</option><option value="agent">에이전트 버스</option>
+        </select>
+        <select id="fl-sev"><option value="">모든 심각도</option><option value="warn">경고 이상</option><option value="critical">심각만</option></select>
+        <select id="fl-intent"><option value="">모든 인텐트</option></select>
+        <input type="text" id="fl-trace" placeholder="traceId" size="14">
+        <input type="text" id="fl-q" placeholder="검색" size="14">
+        <label><input type="checkbox" id="fl-pause"> 일시정지</label>
+        <span class="badge" id="fl-incident" style="display:none"></span>
+        <button class="btn small" id="fl-clear">필터 해제</button>
+        <button class="btn small" id="fl-seq">시퀀스 다이어그램</button>
+        <span class="note" id="fl-count"></span>
+      </div>
+      <div class="logwrap"><table class="log" id="log"><thead><tr>
+        <th>시각</th><th>계층</th><th>단계</th><th>인텐트</th><th>유형</th><th>내용</th><th>trace</th></tr></thead><tbody></tbody></table></div>
+    </div>
+    <div id="tab-raw" style="display:none">
+      <div class="filters">
+        <select id="raw-layer"><option>network</option><option>service</option><option>resource</option><option>dashboard</option></select>
+        <label><input type="checkbox" id="raw-follow" checked> 자동 갱신</label>
+        <span class="note">logs/&lt;layer&gt;.log 의 마지막 300줄</span>
+      </div>
+      <pre class="raw" id="raw"></pre>
+    </div>
+  </section>
+</main>
+
+<div class="modal" id="modal"><div class="box">
+  <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+    <h2 style="margin:0;font-size:14px" id="mTitle"></h2><div class="spacer"></div>
+    <button class="btn" id="mClose">닫기</button>
+  </div>
+  <div id="mBody"></div>
+</div></div>
+<div id="tip"></div>
+
+<script>
+"use strict";
+const STAGE = {DETECT: "감지", REPORT: "보고", EXECUTE: "처리", COORDINATE: "조율", RESOLVE: "해결", FLOW: "신호", LOG: "로그"};
+const SEV_ICON = {ok: "✓", warn: "!", critical: "×", info: "·"};
+const SEV_RANK = {info: 0, ok: 0, warn: 1, critical: 2};
+const S = {events: [], incidents: new Map(), state: null, selInc: null, incEvents: null, dirty: new Set(["all"])};
+const MAXEV = 4000;
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const hhmmss = (t) => { const d = new Date(t * 1000); return d.toTimeString().slice(0, 8); };
+const pct = (x, d = 1) => x == null ? "–" : (x * 100).toFixed(d) + "%";
+const sec = (x) => x == null ? "–" : (x < 10 ? x.toFixed(1) : Math.round(x)) + " s";
+const layerTag = (l) => `<span class="layerTag" style="background:var(--${l})">${l[0].toUpperCase()}</span>`;
+const sevIcon = (s) => `<span class="sev ${s}" aria-label="${s}">${SEV_ICON[s] || "·"}</span>`;
+
+/* ---- theme ---- */
+(function () {
+  let t = null; try { t = localStorage.getItem("aan-theme"); } catch (e) {}
+  if (t) document.documentElement.dataset.theme = t;
+  $("theme").onclick = () => {
+    const cur = document.documentElement.dataset.theme ||
+      (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    const nx = cur === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = nx;
+    try { localStorage.setItem("aan-theme", nx); } catch (e) {}
+  };
+})();
+setInterval(() => { $("clock").textContent = new Date().toTimeString().slice(0, 8); }, 1000);
+
+/* ---- stream ---- */
+function connect() {
+  const es = new EventSource("/dash/stream");
+  const dash = $("link-dash").querySelector(".dot");
+  es.onopen = () => { dash.style.background = "var(--good)"; };
+  es.onerror = () => { dash.style.background = "var(--critical)"; };
+  es.addEventListener("snapshot", (m) => {
+    const d = JSON.parse(m.data);
+    S.events = d.events; S.incidents = new Map(d.incidents.map(i => [i.id, i])); S.state = d.state;
+    S.dirty.add("all"); schedule();
+  });
+  es.addEventListener("event", (m) => {
+    const e = JSON.parse(m.data);
+    S.events.push(e); if (S.events.length > MAXEV) S.events.splice(0, S.events.length - MAXEV);
+    if (S.incEvents && S.selInc && S.incidents.get(S.selInc) && e.intentId === S.incidents.get(S.selInc).intentId) S.incEvents.push(e);
+    S.dirty.add("events"); schedule();
+  });
+  es.addEventListener("incident", (m) => { const i = JSON.parse(m.data); S.incidents.set(i.id, i); S.dirty.add("incidents"); schedule(); });
+  es.addEventListener("state", (m) => { S.state = JSON.parse(m.data); S.dirty.add("state"); schedule(); });
+  es.addEventListener("link", (m) => { const l = JSON.parse(m.data); if (S.state) { S.state.links[l.layer] = l; } renderLinks(); });
+}
+let timer = null;
+function schedule() { if (!timer) timer = setTimeout(() => { timer = null; render(); }, 250); }
+
+function render() {
+  const all = S.dirty.has("all");
+  if (S.state && (all || S.dirty.has("state"))) { renderLinks(); renderKpis(); renderCells(); renderAgents(); renderIntents(); renderReview(); }
+  if (all || S.dirty.has("incidents") || S.dirty.has("state")) renderIncidents();
+  if (all || S.dirty.has("events")) { renderFeeds(); if (!$("fl-pause").checked) renderLog(); }
+  S.dirty.clear();
+}
+
+/* ---- header / KPIs ---- */
+function renderLinks() {
+  const links = (S.state && S.state.links) || {};
+  for (const l of ["service", "network", "resource"]) {
+    const x = links[l] || {}; const el = $("link-" + l);
+    el.querySelector(".dot").style.background = x.up ? "var(--good)" : "var(--critical)";
+    el.title = x.up ? `SSE 연결됨 · 수신 ${x.events} 이벤트` : `끊김 (${x.error || "연결 대기"})`;
+  }
+}
+function renderKpis() {
+  const k = S.state.kpis; const bs = k.byState || {};
+  const tiles = [
+    ["인텐트", k.intents, Object.entries(bs).map(([s, n]) => `${s} ${n}`).join(" · ") || "제출된 인텐트 없음"],
+    ["SLA 준수율", pct(k.sla), "보고 윈도우 평균 (SN-07)"],
+    ["활성 알람", k.activeAlarms, k.cellsDown ? `셀 장애 ${k.cellsDown}` : "셀 장애 없음", k.activeAlarms ? "warn" : null],
+    ["진행 중 인시던트", k.openIncidents, `누적 ${k.incidents} · 해결 ${k.resolved}`, k.openIncidents ? "warn" : null],
+    ["평균 대응 착수 (MTTA)", sec(k.mtta), "감지 → 첫 조치"],
+    ["평균 복구 (MTTR)", sec(k.mttr), "감지 → FULFILLED"],
+    ["자율 처리율", pct(k.autonomy, 0), "사람 검토 없이 해결된 비율"],
+    ["사람 검토 대기", k.humanQueue, "우선순위 1–2 부분수용 · 결정 대기", k.humanQueue ? "warn" : null],
+    ["평균 PRB 이용률", pct(k.avgPrbUtil, 0), "가동 셀 기준 · 목표 70–90%"],
+  ];
+  $("kpis").innerHTML = tiles.map(([l, v, f, s]) =>
+    `<div class="kpi"><div class="label">${esc(l)}</div><div class="value">${s ? sevIcon(s) : ""}${esc(v)}</div><div class="foot">${esc(f)}</div></div>`).join("");
+}
+
+/* ---- incidents ---- */
+const STEPS = ["DETECT", "REPORT", "EXECUTE", "COORDINATE", "RESOLVE"];
+function renderIncidents() {
+  const list = [...S.incidents.values()].sort((a, b) => (b.state !== "RESOLVED") - (a.state !== "RESOLVED") || b.lastAt - a.lastAt).slice(0, 40);
+  if (!list.length) { $("incidents").innerHTML = `<div class="empty">아직 인시던트가 없습니다. 시나리오 제어에서 인텐트를 제출하고 장애를 주입해 보세요.</div>`; return; }
+  $("incidents").innerHTML = list.map(i => {
+    const st = {OPEN: ["warn", "진행 중"], ESCALATED: ["critical", "에스컬레이션"], RESOLVED: ["ok", "해결"], CLOSED: ["info", "종료"]}[i.state] || ["info", i.state];
+    const steps = STEPS.map(s => {
+      const t = i.stages[s];
+      const warn = s === "COORDINATE" && i.escalations > 0;
+      return `<div class="step ${t != null ? "on" : ""} ${warn ? "warn" : ""}"><b>${STAGE[s]}</b>${t != null ? "+" + t.toFixed(1) + " s" : "—"}${i.counts[s] ? ` · ${i.counts[s]}` : ""}</div>`;
+    }).join("");
+    return `<div class="inc ${S.selInc === i.id ? "sel" : ""}" data-inc="${esc(i.id)}">
+      <div class="top"><span class="id">${esc(i.id)}</span><b>${esc(i.intentId)}</b>
+        <span class="badge">${sevIcon(st[0])}${st[1]}</span>
+        ${i.humanReview ? `<span class="badge">${sevIcon("warn")}사람 검토</span>` : ""}
+        ${i.outcome ? `<span class="badge">${esc({"recovered": "SLA 복구", "no SLA impact": "SLA 영향 없음", "handled before SLA impact": "SLA 영향 전 처리"}[i.outcome] || i.outcome)}</span>` : ""}
+        ${i.cells.length ? `<span class="badge mono">${esc(i.cells.join(", "))}</span>` : ""}
+        <span class="spacer"></span><span class="note">${hhmmss(i.openedAt)}</span>
+        <button class="btn small" data-seq="${esc(i.id)}">시퀀스</button></div>
+      <div class="cause" title="${esc(i.cause)}">${esc(i.cause)}</div>
+      <div class="steps">${steps}</div>
+      <div class="meta"><span>MTTA ${sec(i.mtta)}</span><span>${i.state === "CLOSED" ? "종료" : "MTTR"} ${sec(i.mttr)}</span>
+        <span>조치 ${i.actions.length ? esc(i.actions.slice(-3).join(" · ")) : "–"}</span>
+        ${i.escalations ? `<span>SN-14 에스컬레이션 ${i.escalations}</span>` : ""}
+        ${i.decisions.length ? `<span>결정: ${esc(i.decisions[i.decisions.length - 1])}</span>` : ""}</div>
+    </div>`;
+  }).join("");
+}
+$("incidents").addEventListener("click", (ev) => {
+  const sq = ev.target.closest("[data-seq]");
+  if (sq) { ev.stopPropagation(); const i = S.incidents.get(sq.dataset.seq); showSequence(i && i.traceId, sq.dataset.seq); return; }
+  const el = ev.target.closest("[data-inc]"); if (!el) return;
+  selectIncident(S.selInc === el.dataset.inc ? null : el.dataset.inc);
+});
+async function selectIncident(id) {
+  S.selInc = id; S.incEvents = null;
+  const b = $("fl-incident");
+  if (id) {
+    b.style.display = ""; b.textContent = `인시던트 ${id} 필터`;
+    try { S.incEvents = await (await fetch(`/dash/api/events?incident=${encodeURIComponent(id)}&limit=2000`)).json(); } catch (e) { S.incEvents = []; }
+  } else b.style.display = "none";
+  renderIncidents(); renderLog();
+}
+
+/* ---- cells ---- */
+function utilColor(u, up) {
+  if (!up) return "var(--grid)";
+  if (u >= 0.95) return "var(--critical)";
+  if (u >= 0.7) return "var(--seq-4)";
+  if (u >= 0.45) return "var(--seq-3)";
+  return "var(--seq-2)";
+}
+function renderCells() {
+  const sim = S.state.sim || {}; const cells = sim.cells || []; const alarms = sim.activeAlarms || {};
+  const alarmed = new Set(Object.values(Array.isArray(alarms) ? {} : alarms).map(a => String((a && (a.resourceId || a)) || "").split(":").pop()));
+  if (Array.isArray(alarms)) alarms.forEach(a => alarmed.add(String(a.resourceId || a).split(":").pop()));
+  Object.keys(Array.isArray(alarms) ? {} : alarms).forEach(k => alarmed.add(k.split(":").pop().split("/")[0]));
+  $("cells").innerHTML = cells.map(c => {
+    const name = c.resourceId.split(":").pop(); const u = c.prbUtilization || 0;
+    const ints = Object.entries(c.intents || {});
+    const steer = ints.some(([, v]) => v && (v.steeredFrom || v.offload));
+    return `<div class="cell ${c.up ? "" : "down"}" data-cell="${esc(name)}">
+      <div class="nm"><span>${esc(name)}</span><span>${steer ? "⇄ " : ""}${alarmed.has(name) ? "▲ " : ""}${c.up ? "" : "DOWN"}</span></div>
+      <div class="bar"><i style="width:${Math.min(100, u * 100)}%;background:${utilColor(u, c.up)}"></i></div>
+      <div class="sm"><span>${c.up ? pct(u, 0) : "–"}</span><span>인텐트 ${ints.length}</span><span>여유 ${c.freeSharePercent ?? "–"}%</span></div>
+    </div>`;
+  }).join("") || `<div class="empty">Resource Layer 상태 대기 중</div>`;
+  const sc = sim.scenario || {};
+  const on = Object.entries(sc).filter(([k, v]) => v === true).map(([k]) => k);
+  if (sc.cell_down && sc.cell_down.length) on.push("cell_down " + sc.cell_down.join(","));
+  if (sc.load_factor && sc.load_factor !== 1) on.push("load ×" + sc.load_factor);
+  $("scenarioLine").textContent = "현재 시나리오: " + (on.join(" · ") || "정상");
+  S.cellIndex = Object.fromEntries(cells.map(c => [c.resourceId.split(":").pop(), c]));
+}
+const tip = $("tip");
+$("cells").addEventListener("mousemove", (ev) => {
+  const el = ev.target.closest("[data-cell]"); if (!el) { tip.style.display = "none"; return; }
+  const c = S.cellIndex[el.dataset.cell]; if (!c) return;
+  const ints = Object.entries(c.intents || {}).map(([k, v]) =>
+    `<div class="mono">${esc(k)}: ${esc(typeof v === "object" ? JSON.stringify(v) : v)}</div>`).join("");
+  tip.innerHTML = `<b class="mono">${esc(c.resourceId)}</b> ${c.up ? "" : "<b>DOWN</b>"}<br>PRB ${pct(c.prbUtilization, 1)} · 여유 ${c.freeSharePercent}% · ${c.capacityMbps} Mbps<br>
+    할당 ${esc(Object.entries(c.allocation || {}).map(([k, v]) => k + " " + Math.round(v * 100) + "%").join(", "))}<br>
+    이웃 ${esc((c.neighbours || []).join(", "))}${ints ? "<hr style='border:0;border-top:1px solid var(--grid)'>" + ints : ""}`;
+  tip.style.display = "block";
+  tip.style.left = Math.min(ev.clientX + 14, innerWidth - 340) + "px"; tip.style.top = (ev.clientY + 14) + "px";
+});
+$("cells").addEventListener("mouseleave", () => { tip.style.display = "none"; });
+
+/* ---- stage feeds ---- */
+function renderFeeds() {
+  const buckets = {DETECT: [], REPORT: [], EXECUTE: [], COORDINATE: []};
+  for (let k = S.events.length - 1; k >= 0; k--) {
+    const e = S.events[k];
+    let st = e.stage === "RESOLVE" ? (e.msgType === "ResourceAlarmNotify" ? "DETECT" : "REPORT") : e.stage;
+    if (st === "EXECUTE" && e.kind === "tool" && e.severity !== "critical" && buckets.EXECUTE.length > 25) continue;
+    if (buckets[st] && buckets[st].length < 40) buckets[st].push(e);
+  }
+  for (const [st, arr] of Object.entries(buckets)) {
+    $("feed-" + st).innerHTML = arr.map(e => `<div class="fi" data-ev="${e.id}"><span class="t">${hhmmss(e.t)}</span>
+      <span class="s">${sevIcon(e.severity)}${layerTag(e.layer)}${e.intentId ? `<b>${esc(e.intentId)}</b> ` : ""}${esc(e.summary)}</span></div>`).join("")
+      || `<div class="empty">이벤트 없음</div>`;
+  }
+}
+document.querySelectorAll(".feed").forEach(f => f.addEventListener("click", (ev) => {
+  const el = ev.target.closest("[data-ev]"); if (el) showEvent(+el.dataset.ev);
+}));
+
+/* ---- agents / tools / intents / review ---- */
+function renderAgents() {
+  const ag = S.state.agents || [];
+  $("agents").innerHTML = `<thead><tr><th>에이전트</th><th>역할</th><th>상태</th><th class="num">작업</th><th class="num">성공</th><th class="num">실패</th><th class="num">도구호출</th></tr></thead><tbody>` +
+    ag.map(a => `<tr><td class="mono">${esc(a.agentId)}</td><td>${esc(a.role)}</td>
+      <td>${sevIcon(a.state === "ACTIVE" ? "ok" : a.state === "BUSY" ? "info" : "warn")}${esc(a.state)}</td>
+      <td class="num">${a.stats?.tasks ?? 0}</td><td class="num">${a.stats?.ok ?? 0}</td><td class="num">${a.stats?.failed ?? 0}</td><td class="num">${a.stats?.toolCalls ?? 0}</td></tr>`).join("") + "</tbody>";
+  const tl = (S.state.tools || []).slice().sort((a, b) => b.stats.calls - a.stats.calls);
+  $("tools").innerHTML = `<thead><tr><th>MCP 도구</th><th>NR</th><th class="num">호출</th><th class="num">오류</th><th class="num">거부</th><th class="num">평균 ms</th></tr></thead><tbody>` +
+    (tl.map(t => `<tr><td class="mono">${esc(t.mcpName)}</td><td>${esc(t.nrMessage || "")}</td><td class="num">${t.stats.calls}</td>
+      <td class="num">${t.stats.errors}</td><td class="num">${t.stats.denied ? sevIcon("critical") + t.stats.denied : 0}</td>
+      <td class="num">${t.stats.calls ? (t.stats.totalMs / t.stats.calls).toFixed(1) : "–"}</td></tr>`).join("") ||
+      `<tr><td colspan="6" class="empty">아직 도구 호출 없음</td></tr>`) + "</tbody>";
+}
+function renderIntents() {
+  const it = S.state.intents || []; const ff = S.state.fulfilment || {};
+  $("intents").innerHTML = `<thead><tr><th>인텐트</th><th>슬라이스</th><th>P</th><th>상태</th><th>셀 · 점유(%)</th><th class="num">SLA</th></tr></thead><tbody>` +
+    (it.map(r => {
+      const sev = {FULFILLED: "ok", DEGRADED: "warn", FAILED: "critical", REJECTED: "critical"}[r.state] || "info";
+      const shares = Object.entries(r.shares || {}).map(([c, s]) => `${c.split(":").pop()} ${Math.round(s)}`).join(", ");
+      return `<tr><td class="mono"><a href="#" data-intent="${esc(r.intentId)}">${esc(r.intentId)}</a></td><td>${esc(r.sliceType)}</td><td>${r.priority}</td>
+        <td title="${esc(r.reason || r.explanation || "")}">${sevIcon(sev)}${esc(r.state)}</td><td class="mono">${esc(shares)}</td>
+        <td class="num">${pct(ff[r.intentId], 0)}</td></tr>`;
+    }).join("") || `<tr><td colspan="6" class="empty">인텐트 없음</td></tr>`) + "</tbody>";
+  const sel = $("fl-intent"); const cur = sel.value;
+  sel.innerHTML = `<option value="">모든 인텐트</option>` + it.map(r => `<option ${r.intentId === cur ? "selected" : ""}>${esc(r.intentId)}</option>`).join("");
+}
+$("intents").addEventListener("click", (ev) => {
+  const a = ev.target.closest("[data-intent]"); if (!a) return; ev.preventDefault();
+  $("fl-intent").value = a.dataset.intent; renderLog(); $("log").scrollIntoView({behavior: "smooth", block: "start"});
+});
+function renderReview() {
+  const rq = S.state.review || [];
+  const open = rq.filter(r => !r.acked);
+  $("rqCount").textContent = open.length ? `대기 ${open.length}` : "대기 없음";
+  $("review").innerHTML = rq.slice().reverse().map(r => {
+    if (r.kind === "PENDING_DECISION") {
+      const opts = (r.options || []).map(o => o.action).concat(["MOVE_TO_OTHER_CELLS"]).filter((v, i, a) => a.indexOf(v) === i);
+      return `<div class="rq">${sevIcon("critical")}<b>결정 대기</b> ${esc(r.conflictId)} · ${esc((r.intents || []).join(", "))} · ${esc(r.resource)}
+        <div class="acts">${opts.map(o => `<button class="btn small" data-decide="${esc(r.conflictId)}" data-action="${esc(o)}">${esc(o)}</button>`).join("")}</div></div>`;
+    }
+    return `<div class="rq" style="${r.acked ? "opacity:.55" : ""}">${sevIcon(r.acked ? "ok" : "warn")}<b>${esc(r.intentId)}</b> · ${esc(r.action || r.observed || "")}
+      <div class="note">${esc(r.note || r.reason || "")}</div>
+      <div class="acts">${r.acked ? "<span class='note'>확인됨</span>" : `<button class="btn small" data-ack="${esc(r.key)}">확인</button>`}
+      ${r.conflictId ? `<button class="btn small" data-decide="${esc(r.conflictId)}" data-action="CANCEL" data-intent="${esc(r.intentId)}">인텐트 취소</button>` : ""}</div></div>`;
+  }).join("") || `<div class="empty">사람의 판단이 필요한 항목이 없습니다 (자율 처리 중).</div>`;
+}
+$("review").addEventListener("click", async (ev) => {
+  const d = ev.target.closest("[data-decide]"); const a = ev.target.closest("[data-ack]");
+  if (d) {
+    if (!confirm(`${d.dataset.decide} → ${d.dataset.action} 결정을 Service Layer에 보냅니다.`)) return;
+    const r = await post(`/dash/api/conflicts/${encodeURIComponent(d.dataset.decide)}/decide`, {action: d.dataset.action, intentId: d.dataset.intent || undefined});
+    $("ctlResult").textContent = "결정 결과: " + JSON.stringify(r);
+  }
+  if (a) await post(`/dash/api/review/${encodeURIComponent(a.dataset.ack)}/ack`, {});
+});
+
+/* ---- controls ---- */
+async function post(url, body) {
+  const r = await fetch(url, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)});
+  try { return await r.json(); } catch (e) { return {status: r.status}; }
+}
+const BASE = [
+  {utterance: "Remote surgery link at Hospital A under 5 ms, 50 Mbps, 99.999%", priority: 2, cells: ["gNB-012-1", "gNB-012-2"]},
+  {utterance: "Stadium 4K live streaming for fans, 200 Mbps, latency under 50 ms", priority: 3, cells: ["gNB-013-1", "gNB-013-2"]},
+  {utterance: "Smart meters at the port, 5000 devices, 5 Mbps, latency up to 200 ms", priority: 3, cells: ["gNB-015-1", "gNB-015-2"]},
+];
+document.querySelectorAll("[data-sc]").forEach(b => b.onclick = async () => {
+  const r = await post("/dash/api/scenario", JSON.parse(b.dataset.sc));
+  $("ctlResult").textContent = "시나리오: " + JSON.stringify(r.scenario || r);
+});
+document.querySelector("[data-act=base]").onclick = async () => {
+  $("ctlResult").textContent = "제출 중…";
+  const out = [];
+  for (const it of BASE) { const r = await post("/dash/api/intents", it); out.push(`${r.intent?.intentId || "?"}: ${r.response?.status || r.status || "?"}`); }
+  $("ctlResult").textContent = "제출: " + out.join(" · ");
+};
+$("submitUtter").onclick = async () => {
+  const u = $("utter").value.trim(); if (!u) return;
+  $("ctlResult").textContent = "제출 중…";
+  const r = await post("/dash/api/intents", {utterance: u, checkFeasibility: true});
+  $("ctlResult").textContent = `${r.intent?.intentId || ""} ${r.status || r.response?.status || ""} ${r.reason || r.response?.reason || ""}`;
+};
+
+/* ---- unified log ---- */
+function filtered() {
+  const layers = new Set([...document.querySelectorAll(".fl-layer")].filter(x => x.checked).map(x => x.value));
+  const st = $("fl-stage").value, kd = $("fl-kind").value, sv = $("fl-sev").value, it = $("fl-intent").value;
+  const tr = $("fl-trace").value.trim(), q = $("fl-q").value.trim().toLowerCase();
+  const src = S.incEvents || S.events;
+  const out = [];
+  for (let k = src.length - 1; k >= 0 && out.length < 600; k--) {
+    const e = src[k];
+    if (!layers.has(e.layer)) continue;
+    if (st && e.stage !== st) continue;
+    if (kd && e.kind !== kd && !(kd === "agent" && e.kind === "internal")) continue;
+    if (sv && SEV_RANK[e.severity] < SEV_RANK[sv]) continue;
+    if (it && e.intentId !== it) continue;
+    if (tr && !(e.traceId || "").startsWith(tr)) continue;
+    if (q && !(e.summary + " " + (e.msgType || "") + " " + (e.logger || "") + " " + (e.intentId || "")).toLowerCase().includes(q)) continue;
+    out.push(e);
+  }
+  return out;
+}
+function renderLog() {
+  const rows = filtered();
+  $("fl-count").textContent = `${rows.length}건 표시 · 수신 ${S.events.length}`;
+  $("log").tBodies[0].innerHTML = rows.map(e => `<tr data-ev="${e.id}">
+    <td class="mono">${hhmmss(e.t)}</td><td>${layerTag(e.layer)}${esc(e.layer)}</td>
+    <td>${sevIcon(e.severity)}${STAGE[e.stage] || esc(e.stage)}</td><td class="mono">${esc(e.intentId || "")}</td>
+    <td class="mono">${esc(e.kind === "log" ? (e.level + " " + e.logger) : (e.msgType || e.kind))}</td>
+    <td class="sum">${esc(e.summary)}</td><td class="mono">${esc((e.traceId || "").slice(0, 8))}</td></tr>`).join("");
+}
+document.querySelectorAll(".filters input, .filters select").forEach(x => x.addEventListener("input", () => renderLog()));
+$("fl-clear").onclick = () => {
+  document.querySelectorAll(".fl-layer").forEach(x => x.checked = true);
+  ["fl-stage", "fl-kind", "fl-sev", "fl-intent", "fl-trace", "fl-q"].forEach(id => $(id).value = "");
+  selectIncident(null);
+};
+$("fl-seq").onclick = () => {
+  const tr = $("fl-trace").value.trim(); const it = $("fl-intent").value;
+  if (S.selInc) { const i = S.incidents.get(S.selInc); return showSequence(i && i.traceId, S.selInc); }
+  if (tr) return showSequence(tr);
+  if (it) { const e = S.events.find(x => x.intentId === it && x.traceId); return showSequence(e && e.traceId); }
+  alert("인시던트, 인텐트 또는 traceId를 먼저 선택하세요.");
+};
+$("log").addEventListener("click", (ev) => { const tr = ev.target.closest("[data-ev]"); if (tr) showEvent(+tr.dataset.ev); });
+
+/* ---- raw process logs ---- */
+document.querySelectorAll(".tab").forEach(t => t.onclick = () => {
+  document.querySelectorAll(".tab").forEach(x => x.classList.toggle("on", x === t));
+  $("tab-events").style.display = t.dataset.tab === "events" ? "" : "none";
+  $("tab-raw").style.display = t.dataset.tab === "raw" ? "" : "none";
+  if (t.dataset.tab === "raw") loadRaw();
+});
+async function loadRaw() {
+  const pre = $("raw"); const atBottom = pre.scrollTop + pre.clientHeight >= pre.scrollHeight - 20;
+  try { pre.textContent = await (await fetch(`/dash/api/logs/${$("raw-layer").value}?lines=300`)).text(); } catch (e) { pre.textContent = String(e); }
+  if (atBottom) pre.scrollTop = pre.scrollHeight;
+}
+$("raw-layer").onchange = loadRaw;
+setInterval(() => { if ($("tab-raw").style.display !== "none" && $("raw-follow").checked) loadRaw(); }, 3000);
+
+/* ---- modal: event detail / sequence ---- */
+function openModal(title, html) { $("mTitle").textContent = title; $("mBody").innerHTML = html; $("modal").classList.add("on"); }
+$("mClose").onclick = () => $("modal").classList.remove("on");
+$("modal").onclick = (ev) => { if (ev.target.id === "modal") $("modal").classList.remove("on"); };
+document.addEventListener("keydown", (ev) => { if (ev.key === "Escape") $("modal").classList.remove("on"); });
+function showEvent(id) {
+  const e = S.events.find(x => x.id === id) || (S.incEvents || []).find(x => x.id === id); if (!e) return;
+  openModal(`${STAGE[e.stage] || e.stage} · ${e.msgType || e.logger || e.kind}`,
+    `<div class="ctl">${e.traceId ? `<button class="btn" id="evSeq">이 trace의 시퀀스 다이어그램</button><button class="btn" id="evTrace">이 trace로 로그 필터</button>` : ""}</div>
+     <pre>${esc(JSON.stringify(e, null, 2))}</pre>`);
+  if (e.traceId) {
+    $("evSeq").onclick = () => showSequence(e.traceId);
+    $("evTrace").onclick = () => { $("fl-trace").value = e.traceId; $("modal").classList.remove("on"); renderLog(); };
+  }
+}
+let mermaidReady = null;
+function loadMermaid() {
+  if (!mermaidReady) mermaidReady = new Promise((res, rej) => {
+    const s = document.createElement("script");
+    s.src = "https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js";
+    s.onload = () => { window.mermaid.initialize({startOnLoad: false, theme: (document.documentElement.dataset.theme === "dark" || (!document.documentElement.dataset.theme && matchMedia("(prefers-color-scheme: dark)").matches)) ? "dark" : "default", sequence: {useMaxWidth: false}}); res(window.mermaid); };
+    s.onerror = rej; document.head.appendChild(s);
+  });
+  return mermaidReady;
+}
+async function showSequence(traceId, incident) {
+  if (!traceId && !incident) { alert("traceId가 아직 없습니다."); return; }
+  const url = `/dash/api/trace/${encodeURIComponent(traceId || "none")}/mermaid` + (incident ? `?incident=${encodeURIComponent(incident)}` : "");
+  const text = await (await fetch(url)).text();
+  openModal(`시퀀스 다이어그램 · trace ${(traceId || "").slice(0, 12)}${incident ? " · " + incident : ""}`, `<div id="seqOut" class="scroll"><div class="note">렌더링 중…</div></div><details style="margin-top:8px"><summary class="note">Mermaid 원문</summary><pre>${esc(text)}</pre></details>`);
+  if (text.split("\n").length < 2) { $("seqOut").innerHTML = `<div class="empty">이 trace에 표시할 메시지가 없습니다.</div>`; return; }
+  try {
+    const m = await loadMermaid();
+    const {svg} = await m.render("seq" + Date.now(), text);
+    $("seqOut").innerHTML = svg;
+  } catch (e) { $("seqOut").innerHTML = `<div class="note">Mermaid를 불러오지 못해 원문만 표시합니다 (오프라인?).</div>`; }
+}
+
+connect();
+</script>
+</body>
+</html>

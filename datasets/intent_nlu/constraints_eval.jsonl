@@ -1,0 +1,24 @@
+{"id": "cv-01", "text": "Smart water meters, 20,000 devices, latency under 2 ms.", "lang": "en", "blocking": true, "why": "mMTC with URLLC-grade latency"}
+{"id": "cv-02", "text": "Soil sensors across the farm reporting hourly at 200 Mbps each.", "lang": "en", "blocking": true, "why": "mMTC with eMBB-grade bandwidth"}
+{"id": "cv-03", "text": "Remote surgery link at the hospital, latency up to 200 ms is fine.", "lang": "en", "blocking": true, "why": "URLLC with relaxed latency"}
+{"id": "cv-04", "text": "Robot arm motion control in the factory, 500 ms latency.", "lang": "en", "blocking": true, "why": "URLLC with relaxed latency"}
+{"id": "cv-05", "text": "Concert 4K streaming for fans with latency below 1 ms.", "lang": "en", "blocking": true, "why": "eMBB with URLLC latency"}
+{"id": "cv-06", "text": "Video streaming at the stadium, 101% reliability.", "lang": "en", "blocking": true, "why": "invalid reliability"}
+{"id": "cv-07", "text": "스마트 미터 2만 대, 지연 1ms 이하로 검침해 주세요.", "lang": "ko", "blocking": true, "why": "mMTC with URLLC-grade latency"}
+{"id": "cv-08", "text": "농장 토양 센서가 각각 300Mbps로 보고합니다.", "lang": "ko", "blocking": true, "why": "mMTC with eMBB-grade bandwidth"}
+{"id": "cv-09", "text": "병원 원격수술 연결, 지연은 300ms까지 괜찮습니다.", "lang": "ko", "blocking": true, "why": "URLLC with relaxed latency"}
+{"id": "cv-10", "text": "공장 로봇 팔 모션 제어, 지연 1000ms.", "lang": "ko", "blocking": true, "why": "URLLC with relaxed latency"}
+{"id": "cv-11", "text": "공연장 4K 스트리밍, 지연 1ms 미만.", "lang": "ko", "blocking": true, "why": "eMBB with URLLC latency"}
+{"id": "cv-12", "text": "경기장 영상 중계, 신뢰도 150%.", "lang": "ko", "blocking": true, "why": "invalid reliability"}
+{"id": "cv-13", "text": "Smart water meters, 20,000 devices, latency up to 1000 ms.", "lang": "en", "blocking": false, "why": "consistent mMTC"}
+{"id": "cv-14", "text": "Remote surgery link at the hospital under 5 ms, 50 Mbps, 99.999%.", "lang": "en", "blocking": false, "why": "consistent URLLC"}
+{"id": "cv-15", "text": "Concert 4K streaming for fans, 800 Mbps, 40 ms.", "lang": "en", "blocking": false, "why": "consistent eMBB"}
+{"id": "cv-16", "text": "Robot arm motion control in the factory, 2 ms, 99.9999%.", "lang": "en", "blocking": false, "why": "consistent URLLC"}
+{"id": "cv-17", "text": "Soil sensors across the farm, 2 Mbps total, 5000 sensors.", "lang": "en", "blocking": false, "why": "consistent mMTC"}
+{"id": "cv-18", "text": "Cloud gaming lounge downtown, 20 ms, 150 Mbps.", "lang": "en", "blocking": false, "why": "consistent eMBB"}
+{"id": "cv-19", "text": "스마트 미터 2만 대, 지연 1000ms 이하 검침.", "lang": "ko", "blocking": false, "why": "consistent mMTC"}
+{"id": "cv-20", "text": "병원 원격수술 연결, 지연 5ms 이하, 50Mbps, 신뢰도 99.999%.", "lang": "ko", "blocking": false, "why": "consistent URLLC"}
+{"id": "cv-21", "text": "공연장 4K 스트리밍, 800Mbps, 지연 40ms.", "lang": "ko", "blocking": false, "why": "consistent eMBB"}
+{"id": "cv-22", "text": "공장 로봇 팔 모션 제어, 2ms, 신뢰도 99.9999%.", "lang": "ko", "blocking": false, "why": "consistent URLLC"}
+{"id": "cv-23", "text": "농장 토양 센서 5000개, 합계 2Mbps.", "lang": "ko", "blocking": false, "why": "consistent mMTC"}
+{"id": "cv-24", "text": "도심 클라우드 게임 라운지, 20ms, 150Mbps.", "lang": "ko", "blocking": false, "why": "consistent eMBB"}

@@ -1,0 +1,450 @@
+{
+  "model": {
+    "model": "joint-nlu/sbert-onnx:sbert-multilingual-minilm+joint-nlu:joint_nlu",
+    "version": "2.0",
+    "calibrated": true,
+    "alpha": 0.1,
+    "intentMode": "knn",
+    "slotMode": "joint"
+  },
+  "nli": "nli-zeroshot:nli-multilingual-minilm",
+  "ruleset": "constraints.json:12 rules",
+  "splits": {
+    "calib": {
+      "n": 60,
+      "errors": 6,
+      "nliAccuracy": 0.6167,
+      "agreement": 0.6,
+      "accuracyWhenAgree": 0.9444,
+      "accuracyWhenDisagree": 0.8333,
+      "policies": {
+        "conformal": {
+          "clarifyRate": 0.15,
+          "selectiveAccuracy": 0.9216,
+          "errorsCaught": 2,
+          "flagPrecision": 0.2222
+        },
+        "conformal+NLI": {
+          "clarifyRate": 0.4667,
+          "selectiveAccuracy": 0.9375,
+          "errorsCaught": 4,
+          "flagPrecision": 0.1429
+        },
+        "conformal+constraints": {
+          "clarifyRate": 0.15,
+          "selectiveAccuracy": 0.9216,
+          "errorsCaught": 2,
+          "flagPrecision": 0.2222
+        },
+        "conformal+NLI+constraints": {
+          "clarifyRate": 0.4667,
+          "selectiveAccuracy": 0.9375,
+          "errorsCaught": 4,
+          "flagPrecision": 0.1429
+        }
+      },
+      "nliExtraFlags": 19,
+      "nliExtraFlagPrecision": 0.1053,
+      "constraintFlags": [],
+      "nliMsPerUtterance": 19.1,
+      "goldBlockingFalseAlarms": []
+    },
+    "test": {
+      "n": 90,
+      "errors": 12,
+      "nliAccuracy": 0.5778,
+      "agreement": 0.5333,
+      "accuracyWhenAgree": 0.9583,
+      "accuracyWhenDisagree": 0.7619,
+      "policies": {
+        "conformal": {
+          "clarifyRate": 0.0667,
+          "selectiveAccuracy": 0.9286,
+          "errorsCaught": 6,
+          "flagPrecision": 1.0
+        },
+        "conformal+NLI": {
+          "clarifyRate": 0.4667,
+          "selectiveAccuracy": 0.9583,
+          "errorsCaught": 10,
+          "flagPrecision": 0.2381
+        },
+        "conformal+constraints": {
+          "clarifyRate": 0.0667,
+          "selectiveAccuracy": 0.9286,
+          "errorsCaught": 6,
+          "flagPrecision": 1.0
+        },
+        "conformal+NLI+constraints": {
+          "clarifyRate": 0.4667,
+          "selectiveAccuracy": 0.9583,
+          "errorsCaught": 10,
+          "flagPrecision": 0.2381
+        }
+      },
+      "nliExtraFlags": 36,
+      "nliExtraFlagPrecision": 0.1111,
+      "constraintFlags": [
+        "te-005",
+        "te-020"
+      ],
+      "nliMsPerUtterance": 16.1,
+      "goldBlockingFalseAlarms": []
+    },
+    "test_v2": {
+      "n": 60,
+      "errors": 8,
+      "nliAccuracy": 0.6,
+      "agreement": 0.5,
+      "accuracyWhenAgree": 0.9667,
+      "accuracyWhenDisagree": 0.7667,
+      "policies": {
+        "conformal": {
+          "clarifyRate": 0.1167,
+          "selectiveAccuracy": 0.9434,
+          "errorsCaught": 5,
+          "flagPrecision": 0.7143
+        },
+        "conformal+NLI": {
+          "clarifyRate": 0.5333,
+          "selectiveAccuracy": 1.0,
+          "errorsCaught": 8,
+          "flagPrecision": 0.25
+        },
+        "conformal+constraints": {
+          "clarifyRate": 0.1333,
+          "selectiveAccuracy": 0.9615,
+          "errorsCaught": 6,
+          "flagPrecision": 0.75
+        },
+        "conformal+NLI+constraints": {
+          "clarifyRate": 0.5333,
+          "selectiveAccuracy": 1.0,
+          "errorsCaught": 8,
+          "flagPrecision": 0.25
+        }
+      },
+      "nliExtraFlags": 25,
+      "nliExtraFlagPrecision": 0.12,
+      "constraintFlags": [
+        "t2-014",
+        "t2-046"
+      ],
+      "nliMsPerUtterance": 16.2,
+      "goldBlockingFalseAlarms": []
+    }
+  },
+  "nliAdopted": false,
+  "constraintSet": {
+    "n": 24,
+    "precision": 1.0,
+    "recall": 1.0,
+    "rows": [
+      {
+        "id": "cv-01",
+        "gold": true,
+        "pred": true,
+        "slice": "mMTC",
+        "slots": {
+          "devices": 20000,
+          "latency_ms": 2.0
+        },
+        "rules": [
+          "mmtc-low-latency"
+        ],
+        "text": "Smart water meters, 20,000 devices, latency under 2 ms."
+      },
+      {
+        "id": "cv-02",
+        "gold": true,
+        "pred": true,
+        "slice": "mMTC",
+        "slots": {
+          "bandwidth_mbps": 200.0
+        },
+        "rules": [
+          "mmtc-high-bw"
+        ],
+        "text": "Soil sensors across the farm reporting hourly at 200 Mbps each."
+      },
+      {
+        "id": "cv-03",
+        "gold": true,
+        "pred": true,
+        "slice": "URLLC",
+        "slots": {
+          "latency_ms": 200.0
+        },
+        "rules": [
+          "urllc-relaxed-latency"
+        ],
+        "text": "Remote surgery link at the hospital, latency up to 200 ms is fine."
+      },
+      {
+        "id": "cv-04",
+        "gold": true,
+        "pred": true,
+        "slice": "URLLC",
+        "slots": {
+          "latency_ms": 500.0
+        },
+        "rules": [
+          "urllc-relaxed-latency"
+        ],
+        "text": "Robot arm motion control in the factory, 500 ms latency."
+      },
+      {
+        "id": "cv-05",
+        "gold": true,
+        "pred": true,
+        "slice": "eMBB",
+        "slots": {
+          "latency_ms": 1.0
+        },
+        "rules": [
+          "embb-ultra-low-latency"
+        ],
+        "text": "Concert 4K streaming for fans with latency below 1 ms."
+      },
+      {
+        "id": "cv-06",
+        "gold": true,
+        "pred": true,
+        "slice": "eMBB",
+        "slots": {
+          "reliability_percent": 101.0
+        },
+        "rules": [
+          "dom-reliability",
+          "embb-five-nines"
+        ],
+        "text": "Video streaming at the stadium, 101% reliability."
+      },
+      {
+        "id": "cv-07",
+        "gold": true,
+        "pred": true,
+        "slice": "mMTC",
+        "slots": {
+          "devices": 20000,
+          "latency_ms": 1.0
+        },
+        "rules": [
+          "mmtc-low-latency"
+        ],
+        "text": "스마트 미터 2만 대, 지연 1ms 이하로 검침해 주세요."
+      },
+      {
+        "id": "cv-08",
+        "gold": true,
+        "pred": true,
+        "slice": "mMTC",
+        "slots": {
+          "bandwidth_mbps": 300.0
+        },
+        "rules": [
+          "mmtc-high-bw"
+        ],
+        "text": "농장 토양 센서가 각각 300Mbps로 보고합니다."
+      },
+      {
+        "id": "cv-09",
+        "gold": true,
+        "pred": true,
+        "slice": "URLLC",
+        "slots": {
+          "latency_ms": 300.0
+        },
+        "rules": [
+          "urllc-relaxed-latency"
+        ],
+        "text": "병원 원격수술 연결, 지연은 300ms까지 괜찮습니다."
+      },
+      {
+        "id": "cv-10",
+        "gold": true,
+        "pred": true,
+        "slice": "URLLC",
+        "slots": {
+          "latency_ms": 1000.0
+        },
+        "rules": [
+          "urllc-relaxed-latency"
+        ],
+        "text": "공장 로봇 팔 모션 제어, 지연 1000ms."
+      },
+      {
+        "id": "cv-11",
+        "gold": true,
+        "pred": true,
+        "slice": "mMTC",
+        "slots": {
+          "latency_ms": 1.0
+        },
+        "rules": [
+          "mmtc-low-latency"
+        ],
+        "text": "공연장 4K 스트리밍, 지연 1ms 미만."
+      },
+      {
+        "id": "cv-12",
+        "gold": true,
+        "pred": true,
+        "slice": "eMBB",
+        "slots": {
+          "reliability_percent": 150.0
+        },
+        "rules": [
+          "dom-reliability",
+          "embb-five-nines"
+        ],
+        "text": "경기장 영상 중계, 신뢰도 150%."
+      },
+      {
+        "id": "cv-13",
+        "gold": false,
+        "pred": false,
+        "slice": "mMTC",
+        "slots": {
+          "devices": 20000,
+          "latency_ms": 1000.0
+        },
+        "rules": [],
+        "text": "Smart water meters, 20,000 devices, latency up to 1000 ms."
+      },
+      {
+        "id": "cv-14",
+        "gold": false,
+        "pred": false,
+        "slice": "URLLC",
+        "slots": {
+          "latency_ms": 5.0,
+          "bandwidth_mbps": 50.0,
+          "reliability_percent": 99.999
+        },
+        "rules": [],
+        "text": "Remote surgery link at the hospital under 5 ms, 50 Mbps, 99.999%."
+      },
+      {
+        "id": "cv-15",
+        "gold": false,
+        "pred": false,
+        "slice": "eMBB",
+        "slots": {
+          "bandwidth_mbps": 800.0,
+          "latency_ms": 40.0
+        },
+        "rules": [],
+        "text": "Concert 4K streaming for fans, 800 Mbps, 40 ms."
+      },
+      {
+        "id": "cv-16",
+        "gold": false,
+        "pred": false,
+        "slice": "URLLC",
+        "slots": {
+          "latency_ms": 2.0,
+          "reliability_percent": 99.9999
+        },
+        "rules": [],
+        "text": "Robot arm motion control in the factory, 2 ms, 99.9999%."
+      },
+      {
+        "id": "cv-17",
+        "gold": false,
+        "pred": false,
+        "slice": "mMTC",
+        "slots": {
+          "bandwidth_mbps": 2.0,
+          "devices": 5000
+        },
+        "rules": [],
+        "text": "Soil sensors across the farm, 2 Mbps total, 5000 sensors."
+      },
+      {
+        "id": "cv-18",
+        "gold": false,
+        "pred": false,
+        "slice": "eMBB",
+        "slots": {
+          "latency_ms": 20.0,
+          "bandwidth_mbps": 150.0
+        },
+        "rules": [],
+        "text": "Cloud gaming lounge downtown, 20 ms, 150 Mbps."
+      },
+      {
+        "id": "cv-19",
+        "gold": false,
+        "pred": false,
+        "slice": "mMTC",
+        "slots": {
+          "latency_ms": 1000.0
+        },
+        "rules": [],
+        "text": "스마트 미터 2만 대, 지연 1000ms 이하 검침."
+      },
+      {
+        "id": "cv-20",
+        "gold": false,
+        "pred": false,
+        "slice": "URLLC",
+        "slots": {
+          "latency_ms": 5.0,
+          "bandwidth_mbps": 50.0,
+          "reliability_percent": 99.999
+        },
+        "rules": [],
+        "text": "병원 원격수술 연결, 지연 5ms 이하, 50Mbps, 신뢰도 99.999%."
+      },
+      {
+        "id": "cv-21",
+        "gold": false,
+        "pred": false,
+        "slice": "eMBB",
+        "slots": {
+          "bandwidth_mbps": 800.0,
+          "latency_ms": 40.0
+        },
+        "rules": [],
+        "text": "공연장 4K 스트리밍, 800Mbps, 지연 40ms."
+      },
+      {
+        "id": "cv-22",
+        "gold": false,
+        "pred": false,
+        "slice": "URLLC",
+        "slots": {
+          "latency_ms": 2.0,
+          "reliability_percent": 99.9999
+        },
+        "rules": [],
+        "text": "공장 로봇 팔 모션 제어, 2ms, 신뢰도 99.9999%."
+      },
+      {
+        "id": "cv-23",
+        "gold": false,
+        "pred": false,
+        "slice": "mMTC",
+        "slots": {
+          "devices": 5000,
+          "bandwidth_mbps": 2.0
+        },
+        "rules": [],
+        "text": "농장 토양 센서 5000개, 합계 2Mbps."
+      },
+      {
+        "id": "cv-24",
+        "gold": false,
+        "pred": false,
+        "slice": "eMBB",
+        "slots": {
+          "latency_ms": 20.0,
+          "bandwidth_mbps": 150.0
+        },
+        "rules": [],
+        "text": "도심 클라우드 게임 라운지, 20ms, 150Mbps."
+      }
+    ]
+  }
+}

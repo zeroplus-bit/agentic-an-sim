@@ -1,0 +1,178 @@
+{
+ "tensorflow": "2.21.0",
+ "keras": "3.15.1",
+ "seed": 13,
+ "trainRows": 1667,
+ "valRows": 185,
+ "bestValLoss": 0.025,
+ "epochs": [
+  {
+   "epoch": 1,
+   "valLoss": 0.507,
+   "valIntentAcc": 0.9027,
+   "valSlotTokAcc": 0.8611
+  },
+  {
+   "epoch": 2,
+   "valLoss": 0.2231,
+   "valIntentAcc": 0.9568,
+   "valSlotTokAcc": 0.9525
+  },
+  {
+   "epoch": 3,
+   "valLoss": 0.1554,
+   "valIntentAcc": 0.9676,
+   "valSlotTokAcc": 0.9671
+  },
+  {
+   "epoch": 4,
+   "valLoss": 0.1065,
+   "valIntentAcc": 0.9784,
+   "valSlotTokAcc": 0.9762
+  },
+  {
+   "epoch": 5,
+   "valLoss": 0.0849,
+   "valIntentAcc": 0.9784,
+   "valSlotTokAcc": 0.9872
+  },
+  {
+   "epoch": 6,
+   "valLoss": 0.0789,
+   "valIntentAcc": 0.9784,
+   "valSlotTokAcc": 0.9945
+  },
+  {
+   "epoch": 7,
+   "valLoss": 0.0736,
+   "valIntentAcc": 0.9838,
+   "valSlotTokAcc": 0.9945
+  },
+  {
+   "epoch": 8,
+   "valLoss": 0.0682,
+   "valIntentAcc": 0.9892,
+   "valSlotTokAcc": 0.9963
+  },
+  {
+   "epoch": 9,
+   "valLoss": 0.0593,
+   "valIntentAcc": 0.9838,
+   "valSlotTokAcc": 0.9963
+  },
+  {
+   "epoch": 10,
+   "valLoss": 0.0486,
+   "valIntentAcc": 0.9838,
+   "valSlotTokAcc": 0.9982
+  },
+  {
+   "epoch": 11,
+   "valLoss": 0.0428,
+   "valIntentAcc": 0.9892,
+   "valSlotTokAcc": 0.9982
+  },
+  {
+   "epoch": 12,
+   "valLoss": 0.0496,
+   "valIntentAcc": 0.9838,
+   "valSlotTokAcc": 0.9963
+  },
+  {
+   "epoch": 13,
+   "valLoss": 0.0392,
+   "valIntentAcc": 0.9838,
+   "valSlotTokAcc": 0.9963
+  },
+  {
+   "epoch": 14,
+   "valLoss": 0.0314,
+   "valIntentAcc": 0.9946,
+   "valSlotTokAcc": 0.9963
+  },
+  {
+   "epoch": 15,
+   "valLoss": 0.0274,
+   "valIntentAcc": 0.9946,
+   "valSlotTokAcc": 0.9963
+  },
+  {
+   "epoch": 16,
+   "valLoss": 0.0282,
+   "valIntentAcc": 0.9892,
+   "valSlotTokAcc": 0.9982
+  },
+  {
+   "epoch": 17,
+   "valLoss": 0.0282,
+   "valIntentAcc": 0.9946,
+   "valSlotTokAcc": 0.9963
+  },
+  {
+   "epoch": 18,
+   "valLoss": 0.029,
+   "valIntentAcc": 0.9946,
+   "valSlotTokAcc": 0.9982
+  },
+  {
+   "epoch": 19,
+   "valLoss": 0.0313,
+   "valIntentAcc": 0.9946,
+   "valSlotTokAcc": 0.9963
+  },
+  {
+   "epoch": 20,
+   "valLoss": 0.025,
+   "valIntentAcc": 0.9946,
+   "valSlotTokAcc": 0.9982
+  },
+  {
+   "epoch": 21,
+   "valLoss": 0.0258,
+   "valIntentAcc": 0.9892,
+   "valSlotTokAcc": 0.9982
+  },
+  {
+   "epoch": 22,
+   "valLoss": 0.028,
+   "valIntentAcc": 0.9892,
+   "valSlotTokAcc": 1.0
+  },
+  {
+   "epoch": 23,
+   "valLoss": 0.0484,
+   "valIntentAcc": 0.9838,
+   "valSlotTokAcc": 0.9982
+  },
+  {
+   "epoch": 24,
+   "valLoss": 0.0431,
+   "valIntentAcc": 0.9892,
+   "valSlotTokAcc": 1.0
+  },
+  {
+   "epoch": 25,
+   "valLoss": 0.0537,
+   "valIntentAcc": 0.9838,
+   "valSlotTokAcc": 0.9982
+  },
+  {
+   "epoch": 26,
+   "valLoss": 0.0509,
+   "valIntentAcc": 0.9946,
+   "valSlotTokAcc": 0.9982
+  },
+  {
+   "epoch": 27,
+   "valLoss": 0.0412,
+   "valIntentAcc": 0.9892,
+   "valSlotTokAcc": 0.9982
+  },
+  {
+   "epoch": 28,
+   "valLoss": 0.0392,
+   "valIntentAcc": 0.9946,
+   "valSlotTokAcc": 0.9982
+  }
+ ]
+}

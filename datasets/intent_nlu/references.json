@@ -1,0 +1,33 @@
+{
+  "_note": "Reference use cases used as semantic evidence (nearest standard use case for an utterance). 'kpi' values are indicative placeholders, NOT copied from the specs: verified=false until someone checks each row against the cited clause/table and fills 'clause'. They are reported as evidence only and are not used to fill expectations.",
+  "references": [
+    {"id": "ref-telesurgery", "slice": "URLLC", "source": "3GPP TS 22.261 / TS 22.263 (remote surgery, haptic)", "clause": null, "verified": false,
+     "text": ["Remote surgery with a robot controlled by a surgeon at a distant site, haptic feedback", "원격 로봇 수술, 원격지 의사의 햅틱 제어"], "kpi": {"latency_ms": 5, "reliability_percent": 99.999}},
+    {"id": "ref-motion-control", "slice": "URLLC", "source": "3GPP TS 22.104 (motion control, cyclic deterministic traffic)", "clause": null, "verified": false,
+     "text": ["Factory motion control of robots and machines with cyclic deterministic traffic", "공장 로봇·설비의 주기적 결정적 모션 제어"], "kpi": {"latency_ms": 2, "reliability_percent": 99.9999}},
+    {"id": "ref-v2x", "slice": "URLLC", "source": "3GPP TS 22.186 (enhanced V2X: platooning, cooperative driving)", "clause": null, "verified": false,
+     "text": ["Vehicles exchange cooperative driving and collision avoidance messages, platooning", "차량 간 협력 주행·충돌 회피 메시지, 군집주행"], "kpi": {"latency_ms": 5, "reliability_percent": 99.999}},
+    {"id": "ref-mission-critical", "slice": "URLLC", "source": "3GPP TS 22.179/22.280 (mission critical push-to-talk / services)", "clause": null, "verified": false,
+     "text": ["Mission critical voice and data for police, firefighters and disaster responders", "경찰·소방·재난 대응 인력의 임무 필수 음성·데이터"], "kpi": {"latency_ms": 10, "reliability_percent": 99.99}},
+    {"id": "ref-smart-grid", "slice": "URLLC", "source": "3GPP TS 22.261 / TS 22.104 (power distribution protection)", "clause": null, "verified": false,
+     "text": ["Power grid protection and distribution automation signalling between substations", "변전소 간 전력망 보호·배전 자동화 신호"], "kpi": {"latency_ms": 5, "reliability_percent": 99.999}},
+    {"id": "ref-remote-machine", "slice": "URLLC", "source": "3GPP TS 22.261 (remote control of machines, drones, cranes)", "clause": null, "verified": false,
+     "text": ["Remote operation of cranes, excavators and drones with video and control commands", "크레인·굴착기·드론 원격 조종, 영상과 제어 명령"], "kpi": {"latency_ms": 10, "reliability_percent": 99.99}},
+    {"id": "ref-ar-vr", "slice": "eMBB", "source": "3GPP TS 22.261 (AR/VR, immersive media)", "clause": null, "verified": false,
+     "text": ["Immersive virtual and augmented reality experiences with headsets", "헤드셋 기반 몰입형 가상·증강현실 체험"], "kpi": {"bandwidth_mbps": 200, "latency_ms": 20}},
+    {"id": "ref-dense-crowd", "slice": "eMBB", "source": "3GPP TS 22.261 (broadband access in a crowd: stadium, open-air festival)", "clause": null, "verified": false,
+     "text": ["Broadband access for dense crowds at stadiums, concerts and festivals sharing video", "경기장·공연·축제 밀집 군중의 영상 공유 광대역 접속"], "kpi": {"bandwidth_mbps": 300, "latency_ms": 50}},
+    {"id": "ref-uhd-video", "slice": "eMBB", "source": "3GPP TS 22.261 / TS 22.263 (UHD video, live production)", "clause": null, "verified": false,
+     "text": ["Ultra high definition live video streaming, broadcast production and uploads", "초고화질 라이브 스트리밍·방송 제작·영상 업로드"], "kpi": {"bandwidth_mbps": 500, "latency_ms": 50}},
+    {"id": "ref-cloud-gaming", "slice": "eMBB", "source": "3GPP TS 22.261 (cloud gaming, interactive media)", "clause": null, "verified": false,
+     "text": ["Cloud gaming and interactive entertainment for players", "플레이어를 위한 클라우드 게임·인터랙티브 엔터테인먼트"], "kpi": {"bandwidth_mbps": 100, "latency_ms": 20}},
+    {"id": "ref-bulk-transfer", "slice": "eMBB", "source": "GSMA NG.116 GST (best-effort broadband, large downloads)", "clause": null, "verified": false,
+     "text": ["Large file downloads, backups and software updates as background broadband traffic", "대용량 다운로드·백업·소프트웨어 업데이트 백그라운드 트래픽"], "kpi": {"bandwidth_mbps": 500}},
+    {"id": "ref-metering", "slice": "mMTC", "source": "3GPP TS 22.261 (massive IoT: metering, connection density)", "clause": null, "verified": false,
+     "text": ["Massive numbers of smart meters reporting small readings periodically", "대량의 스마트 미터가 작은 검침 값을 주기적으로 보고"], "kpi": {"bandwidth_mbps": 1, "latency_ms": 1000}},
+    {"id": "ref-tracking", "slice": "mMTC", "source": "3GPP TS 22.261 (asset tracking, logistics)", "clause": null, "verified": false,
+     "text": ["Low-power tags tracking the location of assets, containers, pallets and animals", "자산·컨테이너·팔레트·가축 위치를 추적하는 저전력 태그"], "kpi": {"bandwidth_mbps": 1, "latency_ms": 1000}},
+    {"id": "ref-env-sensing", "slice": "mMTC", "source": "3GPP TS 22.261 (massive IoT: environmental and infrastructure monitoring)", "clause": null, "verified": false,
+     "text": ["Battery powered sensors monitoring environment, structures and agriculture for years", "수년간 배터리로 환경·구조물·농업을 감시하는 센서"], "kpi": {"bandwidth_mbps": 1, "latency_ms": 1000}}
+  ]
+}

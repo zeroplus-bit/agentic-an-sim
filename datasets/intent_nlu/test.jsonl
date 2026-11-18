@@ -1,0 +1,90 @@
+{"id": "te-001", "text": "Remote surgery link at Hospital A under 5 ms, 50 Mbps, 99.999%.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {"latency_ms": 5, "bandwidth_mbps": 50, "reliability_percent": 99.999}, "devices": null}
+{"id": "te-002", "text": "A cardiologist will guide a catheter robot in a rural clinic from the university hospital.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "te-003", "text": "Packaging robots must stay synchronized; a jitter spike stops the whole line.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "te-004", "text": "Police officers at the riot need push-to-talk that always gets through.", "lang": "en", "slice": "URLLC", "priority": 1, "expectations": {}, "devices": null}
+{"id": "te-005", "text": "Self-driving shuttles on campus share sensor data with roadside units, below 3 ms.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {"latency_ms": 3}, "devices": null}
+{"id": "te-006", "text": "Earthquake early-warning messages must reach every train controller immediately.", "lang": "en", "slice": "URLLC", "priority": 1, "expectations": {}, "devices": null}
+{"id": "te-007", "text": "We tele-operate quay cranes from the control tower, five nines reliability.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {"reliability_percent": 99.999}, "devices": null}
+{"id": "te-008", "text": "A pilot flies a firefighting drone with a video-assisted joystick, 25 Mbps, latency 8 ms.", "lang": "en", "slice": "URLLC", "priority": 1, "expectations": {"bandwidth_mbps": 25, "latency_ms": 8}, "devices": null}
+{"id": "te-009", "text": "Distribution automation switches isolate faults on the power grid within milliseconds.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "te-010", "text": "Trainee doctors feel tissue resistance through haptic gloves while a mentor operates remotely.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "te-011", "text": "Mobile robots in the warehouse avoid collisions using a shared map that updates every 2 ms.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {"latency_ms": 2}, "devices": null}
+{"id": "te-012", "text": "Disaster response teams need a dedicated, ultra-reliable link at the collapsed building.", "lang": "en", "slice": "URLLC", "priority": 1, "expectations": {}, "devices": null}
+{"id": "te-013", "text": "Platooning trucks on the highway brake together, 99.999 % reliability and 5 ms.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {"reliability_percent": 99.999, "latency_ms": 5}, "devices": null}
+{"id": "te-014", "text": "Chemical plant safety interlocks are triggered over wireless; no delay is acceptable.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "te-015", "text": "The orchestra plays together from three studios and must hear each other without lag.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null, "alt": ["eMBB"]}
+{"id": "te-016", "text": "병원 원격수술 연결, 지연 5ms 이하, 50Mbps, 신뢰도 99.999%.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {"latency_ms": 5, "bandwidth_mbps": 50, "reliability_percent": 99.999}, "devices": null}
+{"id": "te-017", "text": "대학병원 심장내과 의사가 지방 의원의 카테터 로봇을 원격으로 조작합니다.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "te-018", "text": "포장 로봇들이 동기화를 유지해야 합니다. 지터가 튀면 라인 전체가 멈춥니다.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "te-019", "text": "시위 현장 경찰관들의 무전이 반드시 연결되어야 합니다.", "lang": "ko", "slice": "URLLC", "priority": 1, "expectations": {}, "devices": null}
+{"id": "te-020", "text": "캠퍼스 자율주행 셔틀이 노변 장치와 센서 데이터를 공유합니다, 3ms 이하.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {"latency_ms": 3}, "devices": null}
+{"id": "te-021", "text": "지진 조기경보가 모든 열차 제어기에 즉시 도달해야 합니다.", "lang": "ko", "slice": "URLLC", "priority": 1, "expectations": {}, "devices": null}
+{"id": "te-022", "text": "관제탑에서 안벽 크레인을 원격 운전합니다, 파이브 나인 신뢰도.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {"reliability_percent": 99.999}, "devices": null}
+{"id": "te-023", "text": "조종사가 영상 보조 조이스틱으로 소방 드론을 비행합니다, 25Mbps, 지연 8ms.", "lang": "ko", "slice": "URLLC", "priority": 1, "expectations": {"bandwidth_mbps": 25, "latency_ms": 8}, "devices": null}
+{"id": "te-024", "text": "배전 자동화 개폐기가 수 밀리초 안에 고장 구간을 분리합니다.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "te-025", "text": "멘토가 원격 수술하는 동안 수련의는 햅틱 장갑으로 조직 저항을 느낍니다.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "te-026", "text": "창고 이동로봇이 2ms마다 갱신되는 공유 지도로 충돌을 피합니다.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {"latency_ms": 2}, "devices": null}
+{"id": "te-027", "text": "붕괴 건물 현장의 재난 대응팀에 전용 고신뢰 링크가 필요합니다.", "lang": "ko", "slice": "URLLC", "priority": 1, "expectations": {}, "devices": null}
+{"id": "te-028", "text": "고속도로 군집주행 트럭이 함께 제동합니다, 신뢰도 99.999%, 5ms.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {"reliability_percent": 99.999, "latency_ms": 5}, "devices": null}
+{"id": "te-029", "text": "화학공장 안전 인터록이 무선으로 동작합니다. 지연은 용납되지 않습니다.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "te-030", "text": "세 스튜디오의 오케스트라가 서로 지연 없이 들으며 합주합니다.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null, "alt": ["eMBB"]}
+{"id": "te-031", "text": "Special event at the stadium: 4K streaming for 30,000 fans, 1 Gbps.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {"bandwidth_mbps": 1000}, "devices": 30000}
+{"id": "te-032", "text": "Visitors at the theme park share photos and short clips constantly.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-033", "text": "News crews need to upload raw footage from the marathon route, 300 Mbps.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {"bandwidth_mbps": 300}, "devices": null}
+{"id": "te-034", "text": "Airport lounge passengers want fast internet for movies before boarding.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-035", "text": "A real-estate agency offers virtual walkthroughs with headsets in the showroom.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-036", "text": "Remote students take part in a hybrid classroom with two-way HD video.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-037", "text": "Software updates for 2,000 laptops can go overnight as background traffic.", "lang": "en", "slice": "eMBB", "priority": 4, "expectations": {}, "devices": 2000}
+{"id": "te-038", "text": "Telemedicine video consultations for outpatients, 10 Mbps per session.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {"bandwidth_mbps": 10}, "devices": null, "alt": ["URLLC"]}
+{"id": "te-039", "text": "Cloud gaming lounge downtown, latency under 20 ms and 100 Mbps.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {"latency_ms": 20, "bandwidth_mbps": 100}, "devices": null}
+{"id": "te-040", "text": "Security cameras on the campus send HD footage to the cloud recorder.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-041", "text": "The opening ceremony is filmed with 360 cameras for viewers at home, 1.5 Gbps.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {"bandwidth_mbps": 1500}, "devices": null}
+{"id": "te-042", "text": "Train passengers expect to stream music and video throughout the trip.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-043", "text": "A design studio syncs huge 3D models with the cloud all afternoon.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-044", "text": "Pop-up store with mixed-reality fitting mirrors, 200 Mbps, 40 ms.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {"bandwidth_mbps": 200, "latency_ms": 40}, "devices": null}
+{"id": "te-045", "text": "Low priority: nightly sync of the video archive at the port office.", "lang": "en", "slice": "eMBB", "priority": 4, "expectations": {}, "devices": null}
+{"id": "te-046", "text": "경기장 특별 행사: 관람객 30,000명 대상 4K 스트리밍, 1Gbps.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {"bandwidth_mbps": 1000}, "devices": 30000}
+{"id": "te-047", "text": "테마파크 방문객들이 사진과 짧은 영상을 계속 공유합니다.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-048", "text": "마라톤 코스의 취재진이 원본 영상을 올려야 합니다, 300Mbps.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {"bandwidth_mbps": 300}, "devices": null}
+{"id": "te-049", "text": "공항 라운지 승객들이 탑승 전 영화를 볼 빠른 인터넷을 원합니다.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-050", "text": "부동산 중개소 쇼룸에서 헤드셋으로 가상 집 둘러보기를 제공합니다.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-051", "text": "원격 학생들이 양방향 HD 영상으로 하이브리드 수업에 참여합니다.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-052", "text": "노트북 2,000대 소프트웨어 업데이트는 밤사이 백그라운드로 처리해도 됩니다.", "lang": "ko", "slice": "eMBB", "priority": 4, "expectations": {}, "devices": 2000}
+{"id": "te-053", "text": "외래 환자 원격진료 화상 상담, 세션당 10Mbps.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {"bandwidth_mbps": 10}, "devices": null, "alt": ["URLLC"]}
+{"id": "te-054", "text": "도심 클라우드 게임 라운지, 지연 20ms 이하, 100Mbps.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {"latency_ms": 20, "bandwidth_mbps": 100}, "devices": null}
+{"id": "te-055", "text": "캠퍼스 보안 카메라가 HD 영상을 클라우드 녹화기로 보냅니다.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-056", "text": "개막식을 360 카메라로 촬영해 집에서 시청하게 합니다, 1.5Gbps.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {"bandwidth_mbps": 1500}, "devices": null}
+{"id": "te-057", "text": "열차 승객들이 여행 내내 음악과 영상을 스트리밍하길 원합니다.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-058", "text": "디자인 스튜디오가 오후 내내 거대한 3D 모델을 클라우드와 동기화합니다.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-059", "text": "혼합현실 피팅 거울이 있는 팝업 스토어, 200Mbps, 40ms.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {"bandwidth_mbps": 200, "latency_ms": 40}, "devices": null}
+{"id": "te-060", "text": "저우선: 항만 사무소 영상 아카이브 야간 동기화.", "lang": "ko", "slice": "eMBB", "priority": 4, "expectations": {}, "devices": null}
+{"id": "te-061", "text": "Massive IoT for 10,000 smart meters in the city centre, low data rate.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": 10000}
+{"id": "te-062", "text": "Beehives in the orchard carry weight scales that report daily.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-063", "text": "Each pallet in the logistics hub reports its position every few minutes.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-064", "text": "Gas leak detectors in old apartment blocks wake up only when something happens.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-065", "text": "Flood level gauges along the river send a value every 15 minutes, 300 units.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": 300}
+{"id": "te-066", "text": "Rental scooters report battery and GPS to the operator, around 8000 scooters.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": 8000}
+{"id": "te-067", "text": "Greenhouse climate probes, 2 Mbps aggregate, delay up to 500 ms is fine.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {"bandwidth_mbps": 2, "latency_ms": 500}, "devices": null}
+{"id": "te-068", "text": "Patients wear patches that upload heart-rate summaries once an hour.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null, "alt": ["URLLC"]}
+{"id": "te-069", "text": "Vending machines at the stadium report stock levels overnight.", "lang": "en", "slice": "mMTC", "priority": 4, "expectations": {}, "devices": null}
+{"id": "te-070", "text": "Noise monitors around the airport log decibel readings for regulators.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-071", "text": "Street lamps across downtown are dimmed and monitored remotely, 12,000 lamps.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": 12000}
+{"id": "te-072", "text": "Soil probes on the golf course run for five years on a coin cell.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-073", "text": "Manhole covers have tilt sensors that alert when one is opened.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-074", "text": "Library books carry tags so the shelves can be inventoried automatically.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-075", "text": "Gas meters in the industrial complex upload readings, 99.9% delivery, 5,000 devices.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {"reliability_percent": 99.9}, "devices": 5000}
+{"id": "te-076", "text": "도심 스마트 미터 10,000대를 위한 대규모 사물인터넷, 저속 데이터.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": 10000}
+{"id": "te-077", "text": "과수원 벌통에 달린 무게 저울이 하루 한 번 보고합니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-078", "text": "물류센터 팔레트마다 몇 분 간격으로 위치를 보고합니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-079", "text": "노후 아파트 가스 누출 감지기는 이상이 있을 때만 깨어납니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-080", "text": "하천변 수위계 300개가 15분마다 값을 보냅니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": 300}
+{"id": "te-081", "text": "공유 킥보드 약 8000대가 배터리와 GPS를 운영사에 보고합니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": 8000}
+{"id": "te-082", "text": "온실 기후 측정 장치, 합계 2Mbps, 지연 500ms까지 괜찮음.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {"bandwidth_mbps": 2, "latency_ms": 500}, "devices": null}
+{"id": "te-083", "text": "환자가 붙인 패치가 한 시간에 한 번 심박 요약을 올립니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null, "alt": ["URLLC"]}
+{"id": "te-084", "text": "경기장 자판기들이 밤사이 재고 수준을 보고합니다.", "lang": "ko", "slice": "mMTC", "priority": 4, "expectations": {}, "devices": null}
+{"id": "te-085", "text": "공항 주변 소음 측정기가 규제기관용 데시벨 값을 기록합니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-086", "text": "도심 가로등 12,000개를 원격으로 조광하고 감시합니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": 12000}
+{"id": "te-087", "text": "골프장 토양 측정기는 코인 전지 하나로 5년을 갑니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-088", "text": "맨홀 뚜껑 기울기 센서가 열리면 알립니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-089", "text": "도서관 책마다 태그가 있어 서가 재고를 자동으로 조사합니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "te-090", "text": "산업단지 가스 계량기 5,000대 검침 업로드, 전달률 99.9%.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {"reliability_percent": 99.9}, "devices": 5000}

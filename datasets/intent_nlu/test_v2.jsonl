@@ -1,0 +1,60 @@
+{"id": "t2-001", "text": "An endoscopy robot in the island clinic is driven by a specialist on the mainland, max 4 milliseconds.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {"latency_ms": 4}, "devices": null}
+{"id": "t2-002", "text": "Printing presses must stop within one cycle when the operator hits the wireless e-stop.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "t2-003", "text": "Coast guard rescue boats need command links that cannot drop during the storm.", "lang": "en", "slice": "URLLC", "priority": 1, "expectations": {}, "devices": null}
+{"id": "t2-004", "text": "Tram doors and traction are controlled over radio, 99.9999% success, 3 ms.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {"reliability_percent": 99.9999, "latency_ms": 3}, "devices": null}
+{"id": "t2-005", "text": "Agricultural harvesters follow a lead machine autonomously with centimetre-level coordination.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "t2-006", "text": "A bomb disposal robot is steered from a safe distance, 30 Mbps video plus control, 10 ms.", "lang": "en", "slice": "URLLC", "priority": 1, "expectations": {"bandwidth_mbps": 30, "latency_ms": 10}, "devices": null}
+{"id": "t2-007", "text": "Microgrid inverters exchange phase measurements to keep frequency stable.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "t2-008", "text": "Pick-and-place arms in the electronics fab need a deterministic 1 ms cycle.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {"latency_ms": 1}, "devices": null}
+{"id": "t2-009", "text": "Search-and-rescue teams in the tunnel collapse require a reliable dedicated network.", "lang": "en", "slice": "URLLC", "priority": 1, "expectations": {}, "devices": null}
+{"id": "t2-010", "text": "Remote-controlled forklifts at the port must respond instantly to the driver in the office.", "lang": "en", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "t2-011", "text": "섬 지역 의원의 내시경 로봇을 육지 전문의가 조작합니다, 최대 4밀리초.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {"latency_ms": 4}, "devices": null}
+{"id": "t2-012", "text": "작업자가 무선 비상정지를 누르면 인쇄기가 한 주기 안에 멈춰야 합니다.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "t2-013", "text": "태풍 속 해경 구조선의 지휘 통신이 끊기면 안 됩니다.", "lang": "ko", "slice": "URLLC", "priority": 1, "expectations": {}, "devices": null}
+{"id": "t2-014", "text": "트램 출입문과 견인 제어를 무선으로 합니다, 성공률 99.9999%, 3ms.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {"reliability_percent": 99.9999, "latency_ms": 3}, "devices": null}
+{"id": "t2-015", "text": "수확기들이 선도 기계를 따라 센티미터 단위로 협조하며 자율 주행합니다.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "t2-016", "text": "폭발물 처리 로봇을 안전거리에서 조종합니다, 영상과 제어 30Mbps, 10ms.", "lang": "ko", "slice": "URLLC", "priority": 1, "expectations": {"bandwidth_mbps": 30, "latency_ms": 10}, "devices": null}
+{"id": "t2-017", "text": "마이크로그리드 인버터들이 주파수 안정을 위해 위상 측정값을 교환합니다.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "t2-018", "text": "전자 공장의 부품 실장 로봇 팔은 결정적 1ms 주기가 필요합니다.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {"latency_ms": 1}, "devices": null}
+{"id": "t2-019", "text": "터널 붕괴 현장 구조대에 신뢰할 수 있는 전용망이 필요합니다.", "lang": "ko", "slice": "URLLC", "priority": 1, "expectations": {}, "devices": null}
+{"id": "t2-020", "text": "항만의 원격 조종 지게차는 사무실 운전자에게 즉시 반응해야 합니다.", "lang": "ko", "slice": "URLLC", "priority": 2, "expectations": {}, "devices": null}
+{"id": "t2-021", "text": "The motor show livestreams every car reveal to millions online, 800 Mbps uplink.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {"bandwidth_mbps": 800}, "devices": null}
+{"id": "t2-022", "text": "Cruise ship passengers want to binge series while docked at the port.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "t2-023", "text": "A planetarium shows dome films streamed from the cloud at 2 Gbit/s.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {"bandwidth_mbps": 2000}, "devices": null}
+{"id": "t2-024", "text": "Influencers at the food festival go live from their phones, around 5,000 creators.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": 5000}
+{"id": "t2-025", "text": "The architecture firm reviews building models in VR with clients, 60 ms is acceptable.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {"latency_ms": 60}, "devices": null}
+{"id": "t2-026", "text": "Overnight replication of the photo library to the backup site, best effort.", "lang": "en", "slice": "eMBB", "priority": 4, "expectations": {}, "devices": null}
+{"id": "t2-027", "text": "Bus riders downtown watch sports highlights on their commute.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "t2-028", "text": "The university lecture hall streams classes to 1,200 students at once, 500 Mbps.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {"bandwidth_mbps": 500}, "devices": 1200}
+{"id": "t2-029", "text": "Drone camera footage of the marathon is relayed to the TV studio in high definition.", "lang": "en", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "t2-030", "text": "Game patches of 80 GB roll out to the internet cafe machines, low priority.", "lang": "en", "slice": "eMBB", "priority": 4, "expectations": {}, "devices": null}
+{"id": "t2-031", "text": "모터쇼가 모든 신차 공개를 수백만 명에게 생중계합니다, 업링크 800Mbps.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {"bandwidth_mbps": 800}, "devices": null}
+{"id": "t2-032", "text": "항구에 정박한 크루즈 승객들이 드라마를 몰아 보길 원합니다.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "t2-033", "text": "천문관이 클라우드에서 돔 영상을 2Gbps로 받아 상영합니다.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {"bandwidth_mbps": 2000}, "devices": null}
+{"id": "t2-034", "text": "음식 축제에서 인플루언서 약 5,000명이 휴대폰으로 라이브를 합니다.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": 5000}
+{"id": "t2-035", "text": "건축사무소가 고객과 VR로 건물 모델을 검토합니다, 60ms면 충분합니다.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {"latency_ms": 60}, "devices": null}
+{"id": "t2-036", "text": "사진 라이브러리를 백업 사이트로 야간 복제합니다, 저우선.", "lang": "ko", "slice": "eMBB", "priority": 4, "expectations": {}, "devices": null}
+{"id": "t2-037", "text": "도심 버스 승객들이 출퇴근길에 스포츠 하이라이트를 봅니다.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "t2-038", "text": "대학 강의실이 학생 1,200명에게 동시에 수업을 스트리밍합니다, 500Mbps.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {"bandwidth_mbps": 500}, "devices": 1200}
+{"id": "t2-039", "text": "마라톤 드론 촬영 영상을 방송 스튜디오로 고화질 중계합니다.", "lang": "ko", "slice": "eMBB", "priority": 3, "expectations": {}, "devices": null}
+{"id": "t2-040", "text": "PC방 컴퓨터에 80GB 게임 패치를 배포합니다, 저우선.", "lang": "ko", "slice": "eMBB", "priority": 4, "expectations": {}, "devices": null}
+{"id": "t2-041", "text": "Electricity meters in the new apartment complex, 15,000 units, send hourly readings.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": 15000}
+{"id": "t2-042", "text": "Wildlife researchers attach tiny trackers to migrating birds.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "t2-043", "text": "Fire extinguishers in the office towers report pressure once a week.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "t2-044", "text": "Railway track temperature sensors along 300 km of line, 4,000 sensors, 1 Mbps in total.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {"bandwidth_mbps": 1}, "devices": 4000}
+{"id": "t2-045", "text": "Shopping carts carry beacons so the mall can study foot traffic.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "t2-046", "text": "Rooftop solar panels report generation data every 15 minutes, 2 second delay is fine.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {"latency_ms": 2000}, "devices": null}
+{"id": "t2-047", "text": "Hospital beds have occupancy and weight sensors for the nursing dashboard, 900 beds.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": 900}
+{"id": "t2-048", "text": "Grain silos at the farm cooperative measure fill level and humidity.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "t2-049", "text": "Rental bikes report lock status and position, 6000 bicycles across the city.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": 6000}
+{"id": "t2-050", "text": "Seismic nodes buried around the dam log ground motion for engineers, 99.5% delivery.", "lang": "en", "slice": "mMTC", "priority": 3, "expectations": {"reliability_percent": 99.5}, "devices": null}
+{"id": "t2-051", "text": "신축 아파트 단지 전력량계 15,000대가 매시간 검침값을 보냅니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": 15000}
+{"id": "t2-052", "text": "야생동물 연구진이 철새에 초소형 추적기를 부착합니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "t2-053", "text": "사무동 소화기가 일주일에 한 번 압력을 보고합니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "t2-054", "text": "선로 300km 구간 레일 온도 센서 4,000개, 전체 1Mbps.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {"bandwidth_mbps": 1}, "devices": 4000}
+{"id": "t2-055", "text": "쇼핑 카트에 비콘을 달아 쇼핑몰 동선을 분석합니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "t2-056", "text": "옥상 태양광 패널이 15분마다 발전량을 보고합니다, 2초 지연도 괜찮아요.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {"latency_ms": 2000}, "devices": null}
+{"id": "t2-057", "text": "병상 900개에 재실·체중 센서가 있어 간호 대시보드에 표시됩니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": 900}
+{"id": "t2-058", "text": "농협 곡물 사일로가 적재량과 습도를 측정합니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": null}
+{"id": "t2-059", "text": "공공자전거 6000대가 잠금 상태와 위치를 보고합니다.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {}, "devices": 6000}
+{"id": "t2-060", "text": "댐 주변에 묻힌 지진계 노드가 지반 진동을 기록합니다, 전달률 99.5%.", "lang": "ko", "slice": "mMTC", "priority": 3, "expectations": {"reliability_percent": 99.5}, "devices": null}

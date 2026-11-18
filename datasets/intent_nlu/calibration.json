@@ -1,0 +1,41 @@
+{
+  "char-ngram-hash": {
+    "encoder": "char-ngram-hash",
+    "k": 5,
+    "temperature": 0.013082538143155272,
+    "qhat": 0.8918049015577281,
+    "alpha": 0.1,
+    "calibN": 60,
+    "memory": 320
+  },
+  "sbert-onnx:sbert-multilingual-minilm": {
+    "encoder": "sbert-onnx:sbert-multilingual-minilm",
+    "k": 5,
+    "temperature": 0.021161819818401657,
+    "qhat": 0.7094212822284958,
+    "alpha": 0.1,
+    "calibN": 60,
+    "memory": 320
+  },
+  "joint": {
+    "model": "sbert-onnx:sbert-multilingual-minilm+joint-nlu:joint_nlu",
+    "mode": "knn",
+    "slotMode": "joint",
+    "Tjoint": 2.9544716174545704,
+    "Tknn": 0.021161819818401657,
+    "qhat": 0.7094212822284958,
+    "alpha": 0.1,
+    "selection": {
+      "calibNLL": {
+        "knn": 0.2753,
+        "joint": 0.3971,
+        "ensemble": 0.2895
+      },
+      "calibSlotExactMatch": {
+        "regex": 0.95,
+        "joint": 0.9833,
+        "joint+regex": 0.9833
+      }
+    }
+  }
+}
