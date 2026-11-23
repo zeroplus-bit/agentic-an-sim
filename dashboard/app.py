@@ -522,6 +522,58 @@ async def scenario(payload: dict[str, Any] = Body(...)):
     return r.json()
 
 
+DEMO_INTENTS = [
+    {"utterance": "Remote surgery link at Hospital A under 5 ms, 50 Mbps, 99.999%", "priority": 2,
+     "cells": ["gNB-012-1", "gNB-012-2"]},
+    {"utterance": "Stadium 4K live streaming for fans, 200 Mbps, latency under 50 ms", "priority": 3,
+     "cells": ["gNB-013-1", "gNB-013-2"]},
+    {"utterance": "Smart meters at the port, 5000 devices, 5 Mbps, latency up to 200 ms", "priority": 3,
+     "cells": ["gNB-015-1", "gNB-015-2"]},
+]
+
+
+async def run_demo_scenario() -> None:
+    async def set_resource(payload: dict[str, Any]) -> dict[str, Any]:
+        r = await gw.http.post(f"{config.RESOURCE_URL}/sim/scenario", json=payload, timeout=5)
+        return r.json()
+
+    try:
+        log.warning("comprehensive demo scenario started", extra={"stage": "DETECT"})
+        await set_resource({"is_emergency": False, "is_special_event": False, "is_iot_surge": False,
+                            "cell_down": [], "load_factor": 1.0})
+
+        for payload in DEMO_INTENTS:
+            r = await gw.http.post(f"{config.SERVICE_URL}/api/intents", json=payload, timeout=60)
+            r.raise_for_status()
+        await asyncio.sleep(10)
+
+        await set_resource({"is_emergency": True, "load_factor": 1.3})
+        log.warning("comprehensive demo: emergency traffic and URLLC load increase",
+                    extra={"stage": "DETECT"})
+        await asyncio.sleep(8)
+
+        await set_resource({"cell_down": ["gNB-012-1"], "load_factor": 1.6})
+        log.warning("comprehensive demo: gNB-012-1 cell outage injected",
+                    extra={"stage": "DETECT", "cell": "gNB-012-1"})
+        await asyncio.sleep(30)
+
+        await set_resource({"is_emergency": False, "is_special_event": False, "is_iot_surge": False,
+                            "cell_down": [], "load_factor": 1.0})
+        log.info("comprehensive demo: scenario cleared and recovery phase started",
+                 extra={"stage": "RESOLVE"})
+    except Exception:
+        log.exception("comprehensive demo scenario failed")
+
+
+@app.post("/dash/api/scenario/demo")
+async def demo_scenario():
+    if getattr(gw, "demo_task", None) and not gw.demo_task.done():
+        return {"started": False, "running": True, "message": "종합 시나리오가 이미 실행 중입니다."}
+    gw.demo_task = asyncio.create_task(run_demo_scenario())
+    return {"started": True, "running": True,
+            "message": "종합 시나리오 시작: 기본 인텐트 → 응급 부하 → 셀 장애 → 부하 상승 → 복구"}
+
+
 @app.post("/dash/api/intents")
 async def submit(payload: dict[str, Any] = Body(...)):
     r = await gw.http.post(f"{config.SERVICE_URL}/api/intents", json=payload, timeout=60)

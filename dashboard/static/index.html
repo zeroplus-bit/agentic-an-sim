@@ -201,6 +201,7 @@ pre.raw { margin: 0; max-height: 520px; overflow: auto; font: 11.5px/1.45 var(--
       <h2 style="margin-top:12px">시나리오 제어 <span class="hint">데모 / 검증용</span></h2>
       <div class="ctl">
         <button class="btn primary" data-act="base">기본 인텐트 3종 제출</button>
+        <button class="btn primary" id="demoScenario">종합 장애 시나리오</button>
         <button class="btn" data-sc='{"is_emergency":true}'>응급 상황</button>
         <button class="btn" data-sc='{"is_special_event":true}'>특별 이벤트</button>
         <button class="btn" data-sc='{"is_iot_surge":true}'>IoT 폭증</button>
@@ -534,6 +535,11 @@ document.querySelectorAll("[data-sc]").forEach(b => b.onclick = async () => {
   const r = await post("/dash/api/scenario", JSON.parse(b.dataset.sc));
   $("ctlResult").textContent = "시나리오: " + JSON.stringify(r.scenario || r);
 });
+$("demoScenario").onclick = async () => {
+  $("ctlResult").textContent = "종합 시나리오 준비 중…";
+  const r = await post("/dash/api/scenario/demo", {});
+  $("ctlResult").textContent = r.message || JSON.stringify(r);
+};
 document.querySelector("[data-act=base]").onclick = async () => {
   $("ctlResult").textContent = "제출 중…";
   const out = [];
