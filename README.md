@@ -11,6 +11,7 @@ Service Layer  :8100  ──SN /sn/v1 + sn.notify.*──▶  Network Layer :820
        │ MCP (stdio)  mcp_servers/sn_mcp_server.py         │ MCP (streamable HTTP)  /tools/mcp  = ToolRegistry
    외부 LLM(Claude 등) = Agent-based Orchestration          내부 에이전트 3종 + 온보딩된 외부 LLM 에이전트
 ```
+<img width="821" height="707" alt="image" src="https://github.com/user-attachments/assets/cff8e5f7-5023-456f-8b0d-2741e6992164" />
 
 ## MCP가 들어가는 두 곳
 
